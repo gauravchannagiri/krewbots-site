@@ -29,10 +29,14 @@ body{background:var(--bg);color:var(--t);font-family:"Inter",system-ui,-apple-sy
 .bgv{position:fixed;inset:0;z-index:0;overflow:hidden;background:#05060F url(/assets/video/robots-poster.jpg) center/cover no-repeat}
 .bgv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s cubic-bezier(.4,0,.2,1)}
 .bgv video.on{opacity:1}
-.shade{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(70% 55% at 50% 48%,rgba(5,6,15,.55),rgba(5,6,15,.78) 70%,rgba(5,6,15,.92)),linear-gradient(180deg,rgba(5,6,15,.6),rgba(5,6,15,.2) 40%,rgba(5,6,15,.85))}
+.bgv video{filter:saturate(1.15) contrast(1.05)}
+main::before{content:"";position:absolute;left:50%;top:50%;width:min(1000px,120vw);height:min(560px,70vh);transform:translate(-50%,-50%);z-index:-1;pointer-events:none;background:radial-gradient(closest-side,rgba(5,6,15,.78),rgba(5,6,15,.5) 55%,transparent)}
+@media (max-width:600px){body main{justify-content:flex-end;padding-bottom:96px}body main::before{top:auto;bottom:30px;transform:translateX(-50%);height:360px;background:radial-gradient(closest-side,rgba(5,6,15,.8),rgba(5,6,15,.55) 60%,transparent)}.bgv video{object-position:50% 40%}}
+.shade{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(5,6,15,.35),transparent 18%,transparent 72%,rgba(5,6,15,.7))}
 @media (max-aspect-ratio:3/4){.bgv{background-image:url(/assets/video/robots-poster-portrait.jpg)}}
-h1,p{text-shadow:0 2px 18px rgba(5,6,15,.9)}
-p{color:rgba(238,242,255,.78)}
+h1,p{text-shadow:0 1px 3px rgba(5,6,15,.95),0 2px 20px rgba(5,6,15,.9)}
+h1 span{text-shadow:none;filter:drop-shadow(0 1px 3px rgba(5,6,15,.95))}
+p{color:rgba(238,242,255,.92)}
 .glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 45% at 50% 46%,rgba(124,77,255,.16),transparent 70%),radial-gradient(40% 30% at 62% 52%,rgba(0,229,255,.08),transparent 70%)}
 main{position:relative;z-index:1;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px 80px;text-align:center}
 picture img{display:block;width:min(880px,94vw);height:auto;filter:drop-shadow(0 0 24px rgba(124,77,255,.25));animation:in 1.4s ease-out both}
