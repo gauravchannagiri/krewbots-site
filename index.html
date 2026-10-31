@@ -26,36 +26,29 @@
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
 body{background:var(--bg);color:var(--t);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
-.bgv{position:fixed;inset:0;z-index:0;overflow:hidden;background:#05060F url(/assets/video/robots-poster.jpg) center/cover no-repeat}
-.bgv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s cubic-bezier(.4,0,.2,1)}
-.bgv video.on{opacity:1}
-.bgv video{filter:saturate(1.15) contrast(1.05)}
-main::before{content:"";position:absolute;left:50%;top:50%;width:min(1000px,120vw);height:min(560px,70vh);transform:translate(-50%,-50%);z-index:-1;pointer-events:none;background:radial-gradient(closest-side,rgba(5,6,15,.78),rgba(5,6,15,.5) 55%,transparent)}
-@media (max-width:600px){body main{justify-content:flex-end;padding-bottom:96px}body main::before{top:auto;bottom:30px;transform:translateX(-50%);height:360px;background:radial-gradient(closest-side,rgba(5,6,15,.8),rgba(5,6,15,.55) 60%,transparent)}.bgv video{object-position:50% 40%}}
-.shade{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(5,6,15,.35),transparent 18%,transparent 72%,rgba(5,6,15,.7))}
-@media (max-aspect-ratio:3/4){.bgv{background-image:url(/assets/video/robots-poster-portrait.jpg)}}
-h1,p{text-shadow:0 1px 3px rgba(5,6,15,.95),0 2px 20px rgba(5,6,15,.9)}
-h1 span{text-shadow:none;filter:drop-shadow(0 1px 3px rgba(5,6,15,.95))}
-p{color:rgba(238,242,255,.92)}
-.glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 45% at 50% 46%,rgba(124,77,255,.16),transparent 70%),radial-gradient(40% 30% at 62% 52%,rgba(0,229,255,.08),transparent 70%)}
-main{position:relative;z-index:1;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 20px 80px;text-align:center}
-picture img{display:block;width:min(880px,94vw);height:auto;filter:drop-shadow(0 0 24px rgba(124,77,255,.25));animation:in 1.4s ease-out both}
+body{overflow-x:hidden;overflow-y:auto}
+.fill{position:fixed;inset:-8%;z-index:0;pointer-events:none;background:#05060F url(/assets/video/robots-poster.jpg) center/cover no-repeat;filter:blur(48px) saturate(1.3) brightness(.38);transform:scale(1.1)}
+.fill::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 50% 55%,transparent,rgba(5,6,15,.75))}
+.frame{position:relative;margin-top:clamp(20px,3.2vh,36px);width:min(1280px,90vw,calc((100svh - 390px)*16/9));aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#05060F url(/assets/video/robots-poster.jpg) center/100% no-repeat;box-shadow:0 0 0 1px rgba(124,77,255,.45),0 0 40px rgba(124,77,255,.28),0 0 90px rgba(0,229,255,.12),0 30px 80px rgba(0,0,0,.6);animation:in 1.4s .6s ease-out both}
+.frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;filter:saturate(1.1) contrast(1.04);transition:opacity 1.2s cubic-bezier(.4,0,.2,1)}
+.frame video.on{opacity:1}
+h1,p{text-shadow:0 1px 3px rgba(5,6,15,.9),0 2px 18px rgba(5,6,15,.8)}
+h1 span{text-shadow:none;filter:drop-shadow(0 1px 3px rgba(5,6,15,.9))}
+main{position:relative;z-index:1;min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(16px,3vh,40px) 20px 48px;text-align:center}
+picture img{display:block;width:min(480px,84vw);height:auto;filter:drop-shadow(0 0 24px rgba(124,77,255,.25));animation:in 1.4s ease-out both}
 h1{margin-top:clamp(12px,3vw,28px);font-weight:600;font-size:clamp(24px,4.2vw,44px);letter-spacing:-.02em;line-height:1.15;animation:in 1.4s .25s ease-out both}
 h1 span{background:linear-gradient(90deg,var(--v),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
-p{margin-top:14px;font-size:clamp(13px,1.6vw,16px);letter-spacing:.18em;text-transform:uppercase;color:rgba(238,242,255,.6);animation:in 1.4s .45s ease-out both}
+p{margin-top:14px;font-size:clamp(13px,1.6vw,16px);letter-spacing:.18em;text-transform:uppercase;color:rgba(238,242,255,.88);animation:in 1.4s .45s ease-out both}
 p::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c);margin-right:10px;vertical-align:middle;animation:pulse 2.4s infinite}
-footer{position:fixed;bottom:18px;left:0;right:0;z-index:1;text-align:center;font-size:12px;letter-spacing:.08em;color:rgba(238,242,255,.4)}
+footer{position:absolute;bottom:18px;left:0;right:0;z-index:1;text-align:center;font-size:12px;letter-spacing:.08em;color:rgba(238,242,255,.4)}
+@media (max-width:700px){main{justify-content:center;padding-top:24px;padding-bottom:72px}picture img{width:92vw}.frame{width:calc(100vw - 24px);border-radius:12px;margin-top:32px}}
 @keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes pulse{50%{opacity:.3}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
-<div class="bgv" aria-hidden="true">
-<video id="v1" muted playsinline preload="metadata" data-src="robots-1"></video>
-<video id="v2" muted playsinline preload="none" data-src="robots-2"></video>
-</div>
-<div class="shade"></div>
+<div class="fill" aria-hidden="true"></div>
 <main>
 <picture>
 <source srcset="/assets/krewbots-logo.webp" type="image/webp">
@@ -63,12 +56,16 @@ footer{position:fixed;bottom:18px;left:0;right:0;z-index:1;text-align:center;fon
 </picture>
 <h1>Your AI agent <span>crew</span> is assembling.</h1>
 <p>Coming soon to krewbots.in</p>
+<div class="frame" aria-hidden="true">
+<video id="v1" muted playsinline preload="metadata" data-src="robots-1"></video>
+<video id="v2" muted playsinline preload="none" data-src="robots-2"></video>
+</div>
 </main>
 <footer>© 2026 KrewBots</footer>
 <script>
 (()=>{const still=matchMedia('(prefers-reduced-motion:reduce)').matches,c=navigator.connection,save=c&&(c.saveData||/2g/.test(c.effectiveType||''));
-if(still||save)return;const small=Math.min(innerWidth,innerHeight)<600,vs=[v1,v2],webm=v1.canPlayType('video/webm; codecs="vp9"');
-vs.forEach(v=>{v.muted=true;v.src='/assets/video/'+v.dataset.src+(small?'-sm.mp4':webm?'.webm':'.mp4');});
+if(still||save)return;const vs=[v1,v2],webm=v1.canPlayType('video/webm; codecs="vp9"');
+vs.forEach(v=>{v.muted=true;v.src='/assets/video/'+v.dataset.src+(webm?'.webm':'.mp4');});
 let i=0;
 function play(v){v.currentTime=0;const p=v.play();p&&p.catch(()=>{});v.classList.add('on');}
 vs.forEach((v,k)=>v.addEventListener('timeupdate',()=>{if(k!==i||!v.duration)return;const n=vs[1-i],left=v.duration-v.currentTime;
