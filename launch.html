@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -12,6 +12,8 @@
 <meta property="og:description" content="24 vendor-neutral blueprints for teams of AI agents: who does what, in what order, and where a person signs off.">
 <meta property="og:image" content="https://krewbots.in/assets/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#090a0c">
 <link rel="icon" href="favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -200,6 +202,34 @@ footer .viz{height:30svh;min-height:200px}
 main{transition:opacity .28s}
 main.out{opacity:0}
 @media(prefers-reduced-motion:reduce){*{transition-duration:.01s!important;animation:none!important}.rv{opacity:1;transform:none}}
+/* finder: every blueprint reachable by audience or by search */
+.find{display:grid;gap:14px;margin-bottom:20px}
+.find input,.pick select{width:100%;padding:15px 20px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--fg);font:700 1rem/1.2 var(--sans);appearance:none;-webkit-appearance:none}
+.find input::placeholder{color:var(--mut);font-weight:500}
+.find input:focus,.pick select:focus{outline:none;border-color:var(--lime);box-shadow:0 0 0 4px rgba(201,248,92,.18)}
+.fchips{display:flex;flex-wrap:wrap;gap:8px}
+.fchips button{padding:11px 16px;border-radius:999px;background:var(--card);font-weight:700;font-size:.88rem;transition:background-color .3s,color .3s}
+.fchips button b{font:500 .68rem/1 var(--mono);margin-left:7px;opacity:.6}
+.fchips button[aria-pressed=true]{background:var(--lime);color:#0e0f10}
+.card.none{grid-column:1/-1}
+.pick{display:grid;gap:8px;margin-bottom:14px}
+.pick select{padding-right:46px;background-image:linear-gradient(45deg,transparent 50%,var(--fg) 50%),linear-gradient(135deg,var(--fg) 50%,transparent 50%);background-position:calc(100% - 25px) 54%,calc(100% - 19px) 54%;background-size:6px 6px;background-repeat:no-repeat}
+@media(min-width:900px){.pick{display:none}.chips{flex-wrap:wrap;overflow:visible}}
+@media(max-width:899px){.chips{display:none}
+  /* the step caption and its Approve button stay on screen while the demo is in view */
+  .cap{position:sticky;bottom:10px;z-index:6;min-height:0;padding:14px 16px;gap:12px;box-shadow:0 0 0 1px var(--line),0 14px 44px rgba(0,0,0,.7)}
+  .cap .n{font-size:1.5rem}.cap h3{font-size:1rem}.cap p{font-size:.88rem;margin-top:3px}.approve{margin-top:10px;padding:12px 20px}}
+.nd.ask{cursor:pointer}
+/* smooth scroll (Lenis) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:clip}
+/* scroll-linked text fill and the card in focus */
+.w{transition:opacity .25s linear}
+.card{transition:background-color .45s,color .45s,box-shadow .6s,transform .4s var(--ease)}
+.card.on{background:var(--lime);color:#0e0f10;box-shadow:0 0 0 1px var(--lime),0 0 24px rgba(201,248,92,.55),0 0 90px rgba(201,248,92,.24)}
+.card.on p,.card.on .no{color:#33360f}
+.card.on .arr{background:#0e0f10;color:#fff}
 </style>
 </head>
 <body>
@@ -223,7 +253,6 @@ main.out{opacity:0}
     <button class="nl hm" type="button" data-go="home" id="nav-home">Home</button>
     <button class="nl" type="button" data-go="blueprints" id="nav-blueprints">Blueprints</button>
     <button class="nl hm" type="button" data-to="packs">Packs</button>
-    <button class="tg" type="button" id="theme" aria-label="Switch between light and dark"><i></i><span>Dark</span></button>
   </nav>
 </header>
 
@@ -234,13 +263,25 @@ main.out{opacity:0}
       <p class="mono">Teams of AI agents · workflow blueprints</p>
       <h1>Build agents with <span class="hl">people in charge.</span></h1>
       <p class="ld">KrewBots sells <b>blueprints for teams of AI agents</b>: 24 vendor-neutral plans you adapt to your own tools, each one showing who does what, in what order, and where <b>a person signs off</b>.</p>
-      <div class="cta"><button class="btn l" type="button" data-want="free-guard">Get the Guard blueprint free <svg class="ic"><use href="#ar"/></svg></button><button class="btn" type="button" data-go="blueprints">See all 24 blueprints</button></div>
+      <div class="cta"><button class="btn l" type="button" data-want="free-guard">Get the Guard blueprint free <svg class="ic"><use href="#ar"/></svg></button><button class="btn" type="button" data-to="find">Find the one for your work</button></div>
     </div>
     <div class="viz" data-form="orbit" aria-hidden="true"></div>
   </div></div>
 </section>
 
-<section class="s flip" id="crew-home">
+<section class="s flip" id="find">
+  <div class="wrap"><div class="sh">
+    <div class="tx rv">
+      <p class="mono">Find yours · all 24</p>
+      <h2>Pick <span class="hl">your work.</span></h2>
+      <p class="ld">Tap what you do, or search for a word like WhatsApp, property or video. The overview, diagram and sources of every blueprint are free to read.</p>
+    </div>
+    <div class="viz" data-form="galaxy" aria-hidden="true"></div>
+  </div>
+  <div class="body" id="find-home"></div></div>
+</section>
+
+<section class="s" id="crew-home">
   <div class="wrap"><div class="sh">
     <div class="tx rv">
       <p class="mono">Demo · an illustration, not a live model</p>
@@ -252,7 +293,7 @@ main.out{opacity:0}
   <div class="body rv" id="demo-home"></div></div>
 </section>
 
-<section class="s">
+<section class="s flip">
   <div class="wrap"><div class="sh">
     <div class="tx rv">
       <p class="mono">What you get</p>
@@ -270,18 +311,6 @@ main.out{opacity:0}
   </ol></div>
 </section>
 
-<section class="s flip">
-  <div class="wrap"><div class="sh">
-    <div class="tx rv">
-      <p class="mono">The register</p>
-      <h2><span class="hl">24</span> blueprints.</h2>
-      <p class="ld">From voice and vision agents to RAG, memory and tool connectors. The overview, diagram and sources of every one are free to read.</p>
-    </div>
-    <div class="viz" data-form="galaxy" aria-hidden="true"></div>
-  </div>
-  <ol class="grid body" id="reg-home"></ol>
-  <div class="foot"><span class="mono">Showing 8 of 24 · every one has its own page</span><button class="btn k" type="button" data-go="blueprints">Open all 24 <svg class="ic"><use href="#ar"/></svg></button></div></div>
-</section>
 
 <section class="s" id="packs">
   <div class="wrap"><div class="sh">
@@ -317,7 +346,7 @@ main.out{opacity:0}
     </div>
     <div class="viz" data-form="river" aria-hidden="true"></div>
   </div>
-  <div class="body"><div class="chips" id="tabs-b" role="group" aria-label="Choose a blueprint"></div><div id="demo-b"></div>
+  <div class="body"><label class="pick"><span class="mono">Blueprint shown</span><select id="pick-b"></select></label><div class="chips" id="tabs-b" role="group" aria-label="Choose a blueprint"></div><div id="demo-b"></div>
   <p style="margin-top:18px"><button class="btn k" type="button" id="open-b">Open the full blueprint <svg class="ic"><use href="#ar"/></svg></button></p></div></div>
 </section>
 <section class="s" id="reg-full-s">
@@ -325,11 +354,11 @@ main.out{opacity:0}
     <div class="tx rv">
       <p class="mono">The register</p>
       <h2>All <span class="hl">24</span> blueprints.</h2>
-      <p class="ld">Open any one for its team, steps, checklist, failure modes and sources.</p>
+      <p class="ld">Filter by what you do, or search. Open any one for its team, steps, checklist, failure modes and sources.</p>
     </div>
     <div class="viz" data-form="galaxy" aria-hidden="true"></div>
   </div>
-  <ol class="grid body" id="reg-full"></ol></div>
+  <div class="body" id="find-full"></div></div>
 </section>
 <section class="s flip">
   <div class="wrap"><div class="sh">
@@ -380,6 +409,7 @@ main.out{opacity:0}
   </div>
 </footer>
 
+<script src="assets/vendor/lenis.min.js"></script>
 <script>
 (function(){
 "use strict";
@@ -456,10 +486,11 @@ Demo.prototype.load=function(spec){
     '<p class="mono lane">People · checks</p>'+d.bot.map(nd).join("")+'</div>'+
     '<div class="cap" aria-live="polite"><span class="n" data-n>00</span><div><h3 data-t>Press play</h3><p data-d>Step through the crew one move at a time, or let it run.</p><div data-a></div></div></div>'+
     '<p class="note">Example data: fictional people and companies, and no real calls, emails or payments.</p></div>';
-  this.board=$(".board",this.host);this.pk=$(".pk",this.host);this.wire=$(".wires line",this.host);
+  this.board=$(".board",this.host);this.board.addEventListener("click",function(e){if(e.target.closest(".nd.ask"))self.approve();});this.pk=$(".pk",this.host);this.wire=$(".wires line",this.host);
   $(".ctl",this.host).addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var c=b.getAttribute("data-c");if(c==="prev"){self.stop();self.go(self.i-1);}else if(c==="next"){self.stop();self.go(self.i+1);}else{self.playing?self.stop():self.play();}});
   this.show();
 };
+Demo.prototype.approve=function(){var self=this;if(!this.waiting())return;this.ok[this.i]=true;this.show();if(this.playing){clearTimeout(this.timer);this.timer=setTimeout(function(){self.go(self.i+1);},900);}};
 Demo.prototype.pos=function(id,corner){var n=$('[data-id="'+id+'"]',this.board);if(!n)return [0,0];return [n.offsetLeft+n.offsetWidth*(corner?.84:.5),n.offsetTop+n.offsetHeight*(corner?.2:.5)];};
 Demo.prototype.waiting=function(){var c=this.i>0?this.d.steps[this.i-1]:null;return !!(c&&c.wait&&!this.ok[this.i]);};
 Demo.prototype.show=function(fly){
@@ -468,6 +499,7 @@ Demo.prototype.show=function(fly){
   var cur=i>0?d.steps[i-1]:null;
   if(cur&&cur.wait&&this.ok[i]) st[d.you.id]="done";
   $$(".nd",this.board).forEach(function(n){var nid=n.getAttribute("data-id"),s=st[nid]||"idle";n.className=n.className.replace(/ s-\w+| act/g,"")+" s-"+s+(cur&&cur.a===nid?" act":"");var lab=$(".st",n);if(lab&&!lab.hasAttribute("data-prog"))lab.textContent=(nid===d.you.id&&s==="done"&&signed)?"signed off ✓":ST[s];});
+  var yn=$('[data-id="'+d.you.id+'"]',this.board),ask=this.waiting();yn.classList.toggle("ask",ask);if(ask)$(".st",yn).textContent="tap to approve";
   $("[data-prog]",this.board).textContent="Step "+i+" of "+d.steps.length;
   $("[data-tray]",this.board).textContent=tray;
   $(".okd",this.board).classList.toggle("on",signed);
@@ -477,7 +509,7 @@ Demo.prototype.show=function(fly){
   var slot=$("[data-a]",this.host);slot.innerHTML="";
   if(this.waiting()){
     var b=D.createElement("button");b.type="button";b.className="approve";b.textContent=cur.btn||"Approve";
-    b.addEventListener("click",function(){self.ok[self.i]=true;self.show();if(self.playing){clearTimeout(self.timer);self.timer=setTimeout(function(){self.go(self.i+1);},900);}});
+    b.addEventListener("click",function(){self.approve();});
     slot.appendChild(b);
   }
   $('[data-c="play"]',this.host).textContent=this.playing?"❚❚":"▶";
@@ -507,7 +539,41 @@ Demo.prototype.play=function(){if(this.i>=this.d.steps.length){this.i=0;this.ok=
 Demo.prototype.stop=function(){this.playing=false;clearTimeout(this.timer);this.show();};
 
 /* ================= cards ================= */
-function regRow(b,i){return '<li class="card go rv" style="--d:'+((i%6)*.04).toFixed(2)+'s" data-go="bp-'+b.s+'"><span class="arr"><svg><use href="#ar"/></svg></span><span class="no">'+bpNo(b)+'</span><h3>'+esc(b.t)+'</h3><p>'+esc(b.i)+'</p><button class="sr" type="button" data-go="bp-'+b.s+'">Open '+esc(b.t)+'</button></li>';}
+var CATS=[["all","All"],["biz","Shops and local business"],["realty","Real estate and construction"],["office","Office and personal"],["creator","Content and marketing"],["solo","Solo app builders"],["dev","Agent engineering"]];
+var CATL={biz:"Local business",realty:"Real estate",office:"Office",creator:"Content",solo:"Solo builders",dev:"Engineering"};
+var CAT={"voice-agent":"biz dev","vision-agent":"biz dev","security-guard":"dev","agent-harness":"dev","orchestration":"dev","rag-with-citations":"dev office","evals":"dev","browser-agent":"dev","agent-memory":"dev office","tool-connectors-mcp":"dev","observability-and-cost":"dev",
+ "personal-ai-assistant":"office","learn-how-products-are-built":"solo creator","deepfake-defence":"office biz","ai-chief-of-staff":"office","app-legal-checklist":"solo","solo-builder-workflow":"solo","seo-for-ai-answers":"creator solo","faceless-video-pipeline":"creator",
+ "property-research-assistant":"realty","construction-site-assistant":"realty","deskside-private-ai":"office biz","whatsapp-enquiry-assistant":"biz","ai-dev-team-signoff":"solo dev"};
+/* extra search words people actually type; never shown on the page */
+var KEYS={"property-research-assistant":"real estate realty broker agent flat apartment house home buyer builder project","construction-site-assistant":"contractor construction civil builder tender bid site real estate","whatsapp-enquiry-assistant":"shop store small business customers orders upi payment restaurant clinic salon chat",
+ "voice-agent":"phone call receptionist helpline customer support small business","vision-agent":"photo image scan camera inspection quality check","deskside-private-ai":"doctor lawyer accountant ca advocate consultant clinic offline private small business","faceless-video-pipeline":"youtube reels shorts instagram creator content social",
+ "seo-for-ai-answers":"seo google website marketing chatgpt","deepfake-defence":"scam fraud family security","ai-chief-of-staff":"manager founder executive briefing meetings spreadsheet email","personal-ai-assistant":"desktop helper voice","app-legal-checklist":"privacy consent law india compliance",
+ "solo-builder-workflow":"indie startup coding saas","rag-with-citations":"documents pdf knowledge base chatbot faq","ai-dev-team-signoff":"coding software developer review","browser-agent":"web automation forms","security-guard":"safety permissions secrets","evals":"testing quality"};
+var fid=0;
+function Finder(host,limit){
+  var cat="all",q="",open=false,id="find-q"+(++fid);
+  host.innerHTML='<div class="find"><label class="sr" for="'+id+'">Search the 24 blueprints</label><input type="search" id="'+id+'" placeholder="Search: WhatsApp, property, video…" autocomplete="off">'+
+    '<div class="fchips" role="group" aria-label="Show blueprints for">'+CATS.map(function(c){var n=c[0]==="all"?BPD.length:BPD.filter(function(b){return (" "+CAT[b.s]+" ").indexOf(" "+c[0]+" ")>=0;}).length;return '<button type="button" data-c="'+c[0]+'" aria-pressed="'+(c[0]==="all")+'">'+c[1]+'<b>'+n+'</b></button>';}).join("")+'</div>'+
+    '<p class="mono" role="status" data-count></p></div><ol class="grid"></ol><div class="foot" hidden><span class="mono">Every one has its own page</span><button class="btn k" type="button" data-all>Show all 24 '+AR+'</button></div>';
+  var grid=$(".grid",host),foot=$(".foot",host),count=$("[data-count]",host),inp=$("input",host);
+  function draw(){
+    var ws=q.toLowerCase().split(/\s+/).filter(Boolean);
+    var list=BPD.filter(function(b){
+      if(cat!=="all"&&(" "+CAT[b.s]+" ").indexOf(" "+cat+" ")<0)return false;
+      var hay=(b.t+" "+b.i+" "+(KEYS[b.s]||"")).toLowerCase();return ws.every(function(w){return hay.indexOf(w)>=0;});});
+    var cut=limit&&!open&&cat==="all"&&!ws.length&&list.length>limit,shown=cut?list.slice(0,limit):list;
+    grid.innerHTML=shown.length?shown.map(regRow).join(""):'<li class="card none"><h3>Nothing matches that.</h3><p>Try one simpler word, or tap All to see every blueprint.</p></li>';
+    count.textContent="Showing "+shown.length+" of "+BPD.length+(cat!=="all"?" · "+CATS.filter(function(c){return c[0]===cat;})[0][1]:"")+(ws.length?" · “"+q.trim()+"”":"");
+    foot.hidden=!cut;arm(host);refreshScroll();
+  }
+  host.addEventListener("click",function(e){
+    var c=e.target.closest("[data-c]");if(c){cat=c.getAttribute("data-c");$$("[data-c]",host).forEach(function(x){x.setAttribute("aria-pressed",x===c);});draw();return;}
+    if(e.target.closest("[data-all]")){open=true;draw();}
+  });
+  inp.addEventListener("input",function(){q=inp.value;draw();});
+  draw();
+}
+function regRow(b,i){return '<li class="card go rv" style="--d:'+((i%6)*.04).toFixed(2)+'s" data-go="bp-'+b.s+'"><span class="arr"><svg><use href="#ar"/></svg></span><span class="no">'+bpNo(b)+' · '+CATL[CAT[b.s].split(" ")[0]]+'</span><h3>'+esc(b.t)+'</h3><p>'+esc(b.i)+'</p><button class="sr" type="button" data-go="bp-'+b.s+'">Open '+esc(b.t)+'</button></li>';}
 function renderReg(el,list){el.innerHTML=list.map(regRow).join("");}
 var PARTS=[
  ["Single blueprint","Full build steps, prompts, config and test checklist for any one blueprint.","","1 blueprint","₹99"],
@@ -580,7 +646,30 @@ function mkSprites(){SPR.d=["#c9f85c","#7df2c0","#e9ffcf","#ffffff"].map(functio
 function sizeP(){PW=W.innerWidth;PH=W.innerHeight;dpr=Math.min(2,W.devicePixelRatio||1);cv.width=PW*dpr;cv.height=PH*dpr;}
 function initP(){sizeP();mkSprites();N=PW<700?1500:2800;P=[];
   for(var i=0;i<N;i++){var q=Math.random();P.push({x:Math.random()*PW,y:Math.random()*PH,k:.03+Math.random()*.07,r:Math.random(),s:Math.random(),q:q,c:q<.42?0:(q<.74?1:(q<.975?2:3)),z:1+Math.pow(Math.random(),3)*1.6,a:0,sz:1});}}
-function refreshViz(){vizList=$$(".viz").filter(function(v){return v.offsetParent!==null;});}
+var lenis=null;
+function toY(y,smooth){if(lenis)lenis.scrollTo(y,{immediate:!smooth,force:true});else W.scrollTo({top:y,behavior:smooth&&!reduce?"smooth":"auto"});}
+/* ================= scroll-linked: text fills in word by word, and the card crossing mid-screen lights up ================= */
+var fills=[],cards=[],lastSY=-1;
+function split(el){
+  if(el.w)return;var tw=D.createTreeWalker(el,NodeFilter.SHOW_TEXT),ns=[],n;while((n=tw.nextNode()))ns.push(n);
+  ns.forEach(function(t){var f=D.createDocumentFragment();t.nodeValue.split(/(\s+)/).forEach(function(x){if(!x)return;if(/^\s+$/.test(x)){f.appendChild(D.createTextNode(x));return;}var sp=D.createElement("span");sp.className="w";sp.textContent=x;f.appendChild(sp);});t.parentNode.replaceChild(f,t);});
+  el.w=$$(".w",el);
+}
+function refreshScroll(){
+  if(reduce)return;var v=views[cur];if(!v)return;
+  fills=$$(".s:not(.hero) .tx h2, .s:not(.hero) .tx .ld",v);fills.forEach(split);
+  cards=$$(".card",v);lastSY=-1;
+}
+function tickS(){
+  if(reduce||film)return;var y=W.scrollY;if(y===lastSY)return;lastSY=y;
+  var vh=W.innerHeight,end=y+vh>=D.documentElement.scrollHeight-4,i,j;
+  for(i=0;i<fills.length;i++){var el=fills[i],r=el.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)continue;
+    var p=end?2:(vh*.88-r.top)/(vh*.24+r.height),w=el.w,n=w.length;
+    for(j=0;j<n;j++){var o=clamp(p*(n+2)-j);o=(.2+.8*o).toFixed(2);if(w[j].o!==o){w[j].o=o;w[j].style.opacity=o;}}}
+  var line=vh*.5;
+  for(i=0;i<cards.length;i++){var c=cards[i],cr=c.getBoundingClientRect(),on=cr.top-10<=line&&cr.bottom+10>=line&&cr.height>0;if(c.on!==on){c.on=on;c.classList.toggle("on",on);}}
+}
+function refreshViz(){refreshScroll();vizList=$$(".viz").filter(function(v){return v.offsetParent!==null;});}
 var curForm="dust",curRect={cx:0,cy:0,R:100};
 function tickP(now){
   var t=reduce?0:now/1000,i,p,best=null,bd=1e9,dark=!!film||html.getAttribute("data-theme")==="dark";
@@ -605,14 +694,14 @@ var SCENES=[["Planner","Plans the <em>work.</em>","river"],["Builder","Builds it
 function runFilm(){
   var root=$("#film");if(!root)return;
   if(reduce){root.remove();return;}
-  root.hidden=false;html.classList.add("film");D.body.style.overflow="hidden";
+  root.hidden=false;html.classList.add("film");D.body.style.overflow="hidden";if(lenis)lenis.stop();
   var capK=$(".fc .k",root),capH=$(".fc h2",root),bar=$(".bar i",root),t0=0,skipAt=-1,cur=-9,ended=false;
   var T_IN=1.5,T_SC=1.45,T_FIN=T_IN+6*T_SC,T_FLY=T_FIN+2.3,T_END=T_FLY+1.3;
   function cap(k,h){capK.textContent=k;capH.classList.remove("in");setTimeout(function(){capH.innerHTML=h.replace(/(<em>.*<\/em>)|([^\s<]+)/g,function(m){return "<span>"+m+"</span>";});$$("span",capH).forEach(function(s,j){s.style.transitionDelay=(j*.06)+"s";});void capH.offsetWidth;capH.classList.add("in");},50);}
   function rect(){return PW>=900?{cx:PW*.7,cy:PH*.5,R:Math.min(PW*.22,PH*.38)}:{cx:PW*.5,cy:PH*.35,R:Math.min(PW*.44,PH*.25)};}
   function slot(){var r=$(".top .brand i").getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,w:r.width};}
   film={form:"dust",rect:rect(),logo:null,fade:1};
-  function end(){if(ended)return;ended=true;film=null;html.classList.remove("film");root.hidden=true;D.body.style.overflow="";W.scrollTo(0,0);}
+  function end(){if(ended)return;ended=true;film=null;html.classList.remove("film");root.hidden=true;D.body.style.overflow="";if(lenis)lenis.start();toY(0);}
   function frame(now){
     if(ended)return;if(!t0)t0=now;
     var t=(now-t0)/1000;if(skipAt>=0)t=T_FLY+(now-skipAt)/1000;
@@ -642,20 +731,20 @@ function show(name,then){
   cur=v;curKey=key;
   for(var k in views)views[k].hidden=(k!==v);
   $("#nav-home").setAttribute("aria-current",v==="home"?"page":"false");$("#nav-blueprints").setAttribute("aria-current",v!=="home"?"page":"false");
-  W.scrollTo(0,0);arm(views[v]);refreshViz();
+  toY(0);arm(views[v]);refreshViz();
   if(v!=="home"&&demoHome)demoHome.stop();
   if(v!=="blueprints"&&demoB)demoB.stop();
   D.title=(v==="bp"?BYS[key.slice(3)].t+" · ":"")+"KrewBots";
   if(then)then();
 }
 function go(name,then){
-  if(name===curKey){W.scrollTo({top:0,behavior:reduce?"auto":"smooth"});if(then)then();return;}
+  if(name===curKey){toY(0,1);if(then)then();return;}
   try{history.pushState(null,"","#"+name);}catch(e){}
   if(reduce){show(name,then);return;}
   var m=views[cur];m.classList.add("out");
   setTimeout(function(){m.classList.remove("out");show(name);var n=views[cur];n.classList.add("out");void n.offsetWidth;n.classList.remove("out");if(then)setTimeout(then,60);},280);
 }
-function scrollToId(id){var el=D.getElementById(id);if(!el)return;var y=el.getBoundingClientRect().top+W.scrollY-70;W.scrollTo({top:y,behavior:reduce?"auto":"smooth"});}
+function scrollToId(id){var el=D.getElementById(id);if(!el)return;var y=el.getBoundingClientRect().top+W.scrollY-70;toY(y,1);}
 D.addEventListener("click",function(e){
   var t=e.target.closest("[data-go],[data-to]");if(!t)return;
   if(t.hasAttribute("data-go")){go(t.getAttribute("data-go"));return;}
@@ -664,9 +753,9 @@ D.addEventListener("click",function(e){
   scrollToId(id);
 });
 var curB=BPD[0];
-function loadB(b,play){curB=b;demoB.stop();demoB.load(specOf(b));$$("#tabs-b button").forEach(function(x){x.setAttribute("aria-pressed",x.getAttribute("data-k")===b.s);});if(play)demoB.play();}
+function loadB(b,play){curB=b;$("#pick-b").value=b.s;demoB.stop();demoB.load(specOf(b));$$("#tabs-b button").forEach(function(x){x.setAttribute("aria-pressed",x.getAttribute("data-k")===b.s);});if(play)demoB.play();}
 
-function loop(now){tickP(now);requestAnimationFrame(loop);}
+function loop(now){tickP(now);tickS();requestAnimationFrame(loop);}
 function want(w){
   var free=w==="free-guard";$("#sign-int").value=w;
   $("#sign-k").textContent=free?"Free · the complete Guard blueprint":"Not on sale yet";
@@ -686,19 +775,21 @@ $("#sign-form").addEventListener("submit",function(e){
 });
 (function(){var miss=[];if(!KB.signup)miss.push("the sign-up form");if(PK.some(function(k){return !KB.checkout[k];}))miss.push("some Buy buttons");
   if(miss.length)$("#preview-note").textContent="Preview build: "+miss.join(" and ")+" are not connected yet. ";})();
-$("#theme").addEventListener("click",function(){var d=html.getAttribute("data-theme")==="dark";html.setAttribute("data-theme",d?"light":"dark");$("span",this).textContent=d?"Dark":"Light";});
-$("#replay").addEventListener("click",function(){W.scrollTo(0,0);runFilm();});
+$("#replay").addEventListener("click",function(){toY(0);runFilm();});
 
 function start(){
-  renderReg($("#reg-home"),BPD.slice(0,8));renderReg($("#reg-full"),BPD);renderBom($("#bom-home"));renderBom($("#bom-b"));
+  new Finder($("#find-home"),6);new Finder($("#find-full"),0);renderBom($("#bom-home"));renderBom($("#bom-b"));
   demoHome=new Demo($("#demo-home"),specOf(BYS["security-guard"]));
   demoB=new Demo($("#demo-b"),specOf(BPD[0]));
   $("#tabs-b").innerHTML=BPD.map(function(b){return '<button type="button" data-k="'+b.s+'" aria-pressed="false">'+esc(b.t)+'</button>';}).join("");
   loadB(BPD[0],false);
+  $("#pick-b").innerHTML=BPD.map(function(b){return '<option value="'+b.s+'">'+bpNo(b)+' · '+esc(b.t)+'</option>';}).join("");
+  $("#pick-b").addEventListener("change",function(){loadB(BYS[this.value],true);});
   $("#tabs-b").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;loadB(BYS[b.getAttribute("data-k")],true);});
   $("#open-b").addEventListener("click",function(){go("bp-"+curB.s);});
   if("IntersectionObserver" in W&&!reduce){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!demoHome.playing&&demoHome.i===0){demoHome.play();o.disconnect();}});},{threshold:.25});o.observe($("#demo-home"));}
   initP();
+  if(W.Lenis&&!reduce){try{lenis=new W.Lenis({autoRaf:true,lerp:.09});}catch(e){lenis=null;}}
   show((location.hash||"").replace("#","")||"home");arm($("footer"));
   var lastW=W.innerWidth,rz=0;W.addEventListener("resize",function(){sizeP();if(W.innerWidth===lastW)return;lastW=W.innerWidth;clearTimeout(rz);rz=setTimeout(function(){demoHome.show();demoB.show();if(demoD&&cur==="bp")demoD.show();},200);});
   function onNav(){var n=(location.hash||"").replace("#","")||"home";if(n!==curKey)show(n);}
