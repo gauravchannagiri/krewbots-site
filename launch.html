@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>KrewBots | Agent blueprints, with people in charge</title>
-<meta name="description" content="24 vendor-neutral blueprints for teams of AI agents: who does what, in what order, and where a person signs off.">
+<title>KrewBots | AI assistants for your business WhatsApp, with you in charge</title>
+<meta name="description" content="KrewBots sets up an AI assistant on your business WhatsApp. It answers enquiries and drafts bookings, and waits for your approval on anything that matters.">
 <meta name="robots" content="noindex"><!-- remove at launch -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KrewBots">
-<meta property="og:title" content="KrewBots | Agent blueprints, with people in charge">
-<meta property="og:description" content="24 vendor-neutral blueprints for teams of AI agents: who does what, in what order, and where a person signs off.">
+<meta property="og:title" content="KrewBots | AI assistants for your business, with you in charge">
+<meta property="og:description" content="KrewBots sets up an AI assistant on your business WhatsApp. It answers enquiries and drafts bookings, and waits for your approval on anything that matters.">
 <meta property="og:image" content="https://krewbots.in/assets/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="color-scheme" content="dark">
@@ -220,6 +220,26 @@ main.out{opacity:0}
   .cap{position:sticky;bottom:10px;z-index:6;min-height:0;padding:14px 16px;gap:12px;box-shadow:0 0 0 1px var(--line),0 14px 44px rgba(0,0,0,.7)}
   .cap .n{font-size:1.5rem}.cap h3{font-size:1rem}.cap p{font-size:.88rem;margin-top:3px}.approve{margin-top:10px;padding:12px 20px}}
 .nd.ask{cursor:pointer}
+/* WhatsApp-style demo: customer chat beside the owner's approval inbox */
+.wa{display:grid;gap:12px}
+.wa-p{background:var(--card);border-radius:26px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.wa-chat{display:flex;flex-direction:column;gap:8px;height:300px;overflow-y:auto;padding:4px 2px;scrollbar-width:none}
+.wa-chat::-webkit-scrollbar{display:none}
+.bub{max-width:84%;padding:10px 13px;border-radius:16px;font-size:.92rem;line-height:1.4;background:var(--bg);animation:pop .45s var(--ease) both}
+.bub.c{align-self:flex-end;background:#1f3d2b;border-bottom-right-radius:5px}
+.bub.b{align-self:flex-start;border-bottom-left-radius:5px}
+.bub small{display:block;margin-top:4px;font:400 .58rem/1 var(--mono);opacity:.6;text-align:right}
+.bub .file{display:inline-block;margin-top:6px;padding:6px 10px;border-radius:10px;background:var(--card2);font:500 .7rem/1 var(--mono)}
+.own-card{background:var(--bg);border-radius:18px;padding:16px;animation:pop .45s var(--ease) both}
+.own-card h3{font-size:1rem}.own-card p{color:var(--mut);font-size:.9rem;margin-top:6px}
+.own-card dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin-top:10px;font-size:.88rem}
+.own-card dt{font:500 .62rem/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.own-card.done{background:var(--lime);color:#0e0f10}.own-card.done p{color:#33360f}
+.own-idle{color:var(--mut);font-size:.9rem;padding:8px 2px}
+.wa .btn[data-replay]{align-self:flex-start;background:var(--bg)}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}}
+@media(min-width:900px){.wa{grid-template-columns:1fr 1fr}.wa-chat{height:360px}}
+@media(prefers-reduced-motion:reduce){.bub,.own-card{animation:none}}
 /* smooth scroll (Lenis) */
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
@@ -230,6 +250,8 @@ html.lenis,html.lenis body{height:auto}
 .card.on{background:var(--lime);color:#0e0f10;box-shadow:0 0 0 1px var(--lime),0 0 24px rgba(201,248,92,.55),0 0 90px rgba(201,248,92,.24)}
 .card.on p,.card.on .no{color:#33360f}
 .card.on .arr{background:#0e0f10;color:#fff}
+.grid .card .btn{margin-top:16px;background:var(--bg)}
+.grid .card.on .btn{background:#0e0f10;color:#fff}
 </style>
 </head>
 <body>
@@ -251,7 +273,7 @@ html.lenis,html.lenis body{height:auto}
   <button class="brand" type="button" data-go="home" aria-label="KrewBots home"><i aria-hidden="true"></i><span>KrewBots</span></button>
   <nav aria-label="Main">
     <button class="nl hm" type="button" data-go="home" id="nav-home">Home</button>
-    <button class="nl" type="button" data-go="blueprints" id="nav-blueprints">Blueprints</button>
+    <button class="nl" type="button" data-go="blueprints" id="nav-blueprints">For builders</button>
     <button class="nl hm" type="button" data-to="packs">Packs</button>
   </nav>
 </header>
@@ -260,39 +282,122 @@ html.lenis,html.lenis body{height:auto}
 <section class="s hero">
   <div class="wrap"><div class="sh">
     <div class="tx">
-      <p class="mono">Teams of AI agents · workflow blueprints</p>
-      <h1>Build agents with <span class="hl">people in charge.</span></h1>
-      <p class="ld">KrewBots sells <b>blueprints for teams of AI agents</b>: 24 vendor-neutral plans you adapt to your own tools, each one showing who does what, in what order, and where <b>a person signs off</b>.</p>
-      <div class="cta"><button class="btn l" type="button" data-want="free-guard">Get the Guard blueprint free <svg class="ic"><use href="#ar"/></svg></button><button class="btn" type="button" data-to="find">Find the one for your work</button></div>
+      <p class="mono">AI assistants for Indian businesses · set up for you</p>
+      <h1>Every enquiry answered. <span class="hl">You approve the rest.</span></h1>
+      <p class="ld">KrewBots sets up an <b>AI assistant on your business WhatsApp</b>. It replies to new enquiries straight away, asks the right questions and drafts the booking. Anything about price, promises or money <b>waits for your tap</b>.</p>
+      <div class="cta"><button class="btn l" type="button" data-wa="Hi KrewBots, I want an AI assistant for my business.">Chat with us on WhatsApp <svg class="ic"><use href="#ar"/></svg></button><button class="btn" type="button" data-to="see">See how it works</button></div>
     </div>
     <div class="viz" data-form="saturn" aria-hidden="true"></div>
   </div></div>
 </section>
 
-<section class="s flip" id="find">
+<section class="s flip" id="see">
   <div class="wrap"><div class="sh">
     <div class="tx rv">
-      <p class="mono">Find yours · all 24</p>
-      <h2>Pick <span class="hl">your work.</span></h2>
-      <p class="ld">Tap what you do, or search for a word like WhatsApp, property or video. The overview, diagram and sources of every blueprint are free to read.</p>
-    </div>
-    <div class="viz" data-form="cube" aria-hidden="true"></div>
-  </div>
-  <div class="body" id="find-home"></div></div>
-</section>
-
-<section class="s" id="crew-home">
-  <div class="wrap"><div class="sh">
-    <div class="tx rv">
-      <p class="mono">Demo · an illustration, not a live model</p>
-      <h2>Watch one <span class="hl">at work.</span></h2>
-      <p class="ld">Seven on the team: three agents, a Guard with fixed rules, and three people. Nothing leaves until a person has seen the exact text. In this one, that person is you.</p>
+      <p class="mono">Demo · an illustration with a fictional business</p>
+      <h2>A late-night enquiry, <span class="hl">handled.</span></h2>
+      <p class="ld">On the left is what your customer sees. On the right is what you see. The visit is only confirmed when you approve it, so try the button.</p>
     </div>
     <div class="viz" data-form="links" aria-hidden="true"></div>
   </div>
-  <div class="body rv" id="demo-home"></div></div>
+  <div class="body"><div class="wa" id="wa-demo">
+    <div class="wa-p"><p class="mono">What your customer sees · WhatsApp</p><div class="wa-chat" data-chat aria-live="polite"></div></div>
+    <div class="wa-p own"><p class="mono">What you see · your approvals</p><div data-own aria-live="polite"></div><button class="btn" type="button" data-replay>Play it again</button></div>
+  </div>
+  <p class="note">Example data: Meadow Realty, Lakeview Residences and the customer are fictional. No real messages are sent.</p></div></div>
 </section>
 
+<section class="s" id="systems">
+  <div class="wrap"><div class="sh">
+    <div class="tx rv">
+      <p class="mono">What we set up</p>
+      <h2>Three jobs, <span class="hl">done for you.</span></h2>
+      <p class="ld">Each one is a working setup on your own WhatsApp number and calendar, built from our agent blueprints. You do not assemble anything.</p>
+    </div>
+    <div class="viz" data-form="cube" aria-hidden="true"></div>
+  </div>
+  <ol class="grid body">
+    <li class="card rv"><span class="no">01 · Brokers and builders</span><h3>Property enquiries to site visits</h3><p>A buyer asks about a project and gets the brochure and price sheet you approved. The assistant asks about configuration, budget and timing, then drafts a site visit for you to approve.</p><button class="btn" type="button" data-wa="Hi KrewBots, I want the property enquiry assistant.">Ask about this <svg class="ic"><use href="#ar"/></svg></button></li>
+    <li class="card rv" style="--d:.05s"><span class="no">02 · Clinics, consultants, coaching</span><h3>Appointment desk</h3><p>An enquiry comes in after hours. The assistant offers free slots from your calendar, books the ordinary ones, sends a reminder before the visit and passes unusual requests to you.</p><button class="btn" type="button" data-wa="Hi KrewBots, I want the appointment desk.">Ask about this <svg class="ic"><use href="#ar"/></svg></button></li>
+    <li class="card rv" style="--d:.1s"><span class="no">03 · Shops, distributors, agencies</span><h3>Payment reminders</h3><p>Pending invoices are read from your sheet. The assistant drafts a polite reminder with your payment link for each one, and nothing is sent until you approve the batch.</p><button class="btn" type="button" data-wa="Hi KrewBots, I want the payment reminder assistant.">Ask about this <svg class="ic"><use href="#ar"/></svg></button></li>
+  </ol></div>
+</section>
+
+<section class="s flip">
+  <div class="wrap"><div class="sh">
+    <div class="tx rv">
+      <p class="mono">Why it will not embarrass you</p>
+      <h2>A person stays <span class="hl">in charge.</span></h2>
+      <p class="ld">Most bots fail a business by inventing a price or promising something nobody agreed to. Every KrewBots setup has a checkpoint that stops that.</p>
+    </div>
+    <div class="viz" data-form="torus" aria-hidden="true"></div>
+  </div>
+  <ol class="grid body">
+    <li class="card rv"><span class="no">01</span><h3>It only says what you approved</h3><p>Answers come from your own brochure, price list and replies. If the answer is not there, it says so and does not guess.</p></li>
+    <li class="card rv" style="--d:.05s"><span class="no">02</span><h3>Money and promises wait for you</h3><p>Discounts, bookings, payment requests and anything outside your price list are drafted, then held until you tap Approve.</p></li>
+    <li class="card rv" style="--d:.1s"><span class="no">03</span><h3>It says it is an AI, and hands over</h3><p>Customers are told they are talking to an assistant. An upset customer or an unusual request goes to a person on your team.</p></li>
+  </ol></div>
+</section>
+
+<section class="s">
+  <div class="wrap"><div class="sh">
+    <div class="tx rv">
+      <p class="mono">How you go live</p>
+      <h2>Three steps, <span class="hl">no developer.</span></h2>
+      <p class="ld">We do the setup. You bring what you already tell customers every day.</p>
+    </div>
+    <div class="viz" data-form="stack" aria-hidden="true"></div>
+  </div>
+  <ol class="steps body">
+    <li class="rv"><span><b>Tell us what customers ask.</b> Send your brochure or price list and the questions you answer most often.</span></li>
+    <li class="rv h"><span><b>Try it on a test number.</b> You message it the way a customer would, and correct anything it gets wrong before a single customer sees it.</span></li>
+    <li class="rv"><span><b>Move it to your business number.</b> WhatsApp asks every business to verify itself for this. It needs your business documents and can take a few days, and we guide you through it.</span></li>
+  </ol></div>
+</section>
+
+<section class="s flip" id="pilot">
+  <div class="wrap"><div class="sh">
+    <div class="tx rv">
+      <p class="mono">First businesses</p>
+      <h2>We are setting up <span class="hl">the first few by hand.</span></h2>
+      <p class="ld">That means you talk to a person, the setup is fitted to your business, and the price is fixed and agreed before any work starts.</p>
+      <div class="cta"><button class="btn l" type="button" data-wa="Hi KrewBots, I would like to be one of the first setups.">Chat with us on WhatsApp <svg class="ic"><use href="#ar"/></svg></button></div>
+    </div>
+    <div class="viz" data-form="globe" aria-hidden="true"></div>
+  </div>
+  <ol class="grid body">
+    <li class="card rv"><h3>Will my WhatsApp number get banned?</h3><p>We set up only through the official WhatsApp Business platform. We do not use unofficial QR-code tools, which put a business number at risk.</p></li>
+    <li class="card rv" style="--d:.05s"><h3>Does it handle Hindi and mixed Hindi-English?</h3><p>We test it on real messages from your own customers before it goes live, and show you the results. If it is not good enough for your customers, we will say so.</p></li>
+    <li class="card rv" style="--d:.1s"><h3>What does it cost to run?</h3><p>WhatsApp and the AI provider charge for usage. We estimate that for your volume before you commit, so the running cost is known up front.</p></li>
+    <li class="card rv" style="--d:.15s"><h3>Do I need to hire a developer?</h3><p>No. You need your business documents for WhatsApp verification, and someone on your team who can approve messages.</p></li>
+  </ol></div>
+</section>
+
+<section class="s">
+  <div class="wrap"><div class="sh">
+    <div class="tx rv">
+      <p class="mono">For builders</p>
+      <h2>The 24 blueprints <span class="hl">behind it.</span></h2>
+      <p class="ld">Every setup is built from a published pattern: the team, the steps, the failure modes and the sources. If you build agents yourself, read them all.</p>
+      <div class="cta"><button class="btn k" type="button" data-go="blueprints">Open the blueprints <svg class="ic"><use href="#ar"/></svg></button></div>
+    </div>
+    <div class="viz" data-form="twin" aria-hidden="true"></div>
+  </div></div>
+</section>
+</main>
+
+<main id="v-blueprints" hidden>
+<section class="s hero">
+  <div class="wrap"><div class="sh">
+    <div class="tx">
+      <p class="mono crumbs"><button type="button" data-go="home">Home</button> › Agent Blueprints</p>
+      <h1>Agent blueprints, with <span class="hl">people in charge.</span></h1>
+      <p class="ld">Vendor-neutral patterns for building AI agents that people stay in charge of: who does what, the steps in order, and how it can fail. There are <b>24</b>, each with named sources such as OWASP, NIST and the MCP specification.</p>
+      <div class="cta"><button class="btn l" type="button" data-to="reg-full-s">Jump to all 24 <svg class="ic"><use href="#ar"/></svg></button><button class="btn" type="button" data-to="packs-b">Packs and kits</button><button class="btn" type="button" data-want="free-guard">Get the Guard blueprint free</button></div>
+    </div>
+    <div class="viz" data-form="globe" aria-hidden="true"></div>
+  </div></div>
+</section>
 <section class="s flip">
   <div class="wrap"><div class="sh">
     <div class="tx rv">
@@ -310,34 +415,7 @@ html.lenis,html.lenis body{height:auto}
     <li class="card dark rv" style="--d:.2s"><span class="no" style="color:inherit;opacity:.7">05</span><h3>Its sources</h3><p>Named and linked: OWASP, NIST and the MCP specification among them.</p></li>
   </ol></div>
 </section>
-
-
-<section class="s" id="packs">
-  <div class="wrap"><div class="sh">
-    <div class="tx rv">
-      <p class="mono">Packs and kits</p>
-      <h2>Pick your <span class="hl">parts.</span></h2>
-      <p class="ld">Buy one blueprint, a pack built around a kind of work, or everything at once.</p>
-    </div>
-    <div class="viz" data-form="torus" aria-hidden="true"></div>
-  </div>
-  <div class="body" id="bom-home"></div></div>
-</section>
-</main>
-
-<main id="v-blueprints" hidden>
-<section class="s hero">
-  <div class="wrap"><div class="sh">
-    <div class="tx">
-      <p class="mono crumbs"><button type="button" data-go="home">Home</button> › Agent Blueprints</p>
-      <h1>Agent blueprints, with <span class="hl">people in charge.</span></h1>
-      <p class="ld">Vendor-neutral patterns for building AI agents that people stay in charge of: who does what, the steps in order, and how it can fail. There are <b>24</b>, each with named sources such as OWASP, NIST and the MCP specification.</p>
-      <div class="cta"><button class="btn l" type="button" data-to="reg-full-s">Jump to all 24 <svg class="ic"><use href="#ar"/></svg></button><button class="btn" type="button" data-to="packs-b">Packs and kits</button></div>
-    </div>
-    <div class="viz" data-form="globe" aria-hidden="true"></div>
-  </div></div>
-</section>
-<section class="s flip" id="crew-b">
+<section class="s" id="crew-b">
   <div class="wrap"><div class="sh">
     <div class="tx rv">
       <p class="mono">Demo · an illustration, not a live model</p>
@@ -349,7 +427,7 @@ html.lenis,html.lenis body{height:auto}
   <div class="body"><label class="pick"><span class="mono">Blueprint shown</span><select id="pick-b"></select></label><div class="chips" id="tabs-b" role="group" aria-label="Choose a blueprint"></div><div id="demo-b"></div>
   <p style="margin-top:18px"><button class="btn k" type="button" id="open-b">Open the full blueprint <svg class="ic"><use href="#ar"/></svg></button></p></div></div>
 </section>
-<section class="s" id="reg-full-s">
+<section class="s flip" id="reg-full-s">
   <div class="wrap"><div class="sh">
     <div class="tx rv">
       <p class="mono">The register</p>
@@ -360,7 +438,7 @@ html.lenis,html.lenis body{height:auto}
   </div>
   <div class="body" id="find-full"></div></div>
 </section>
-<section class="s flip">
+<section class="s">
   <div class="wrap"><div class="sh">
     <div class="tx rv">
       <p class="mono">Where to start</p>
@@ -375,7 +453,7 @@ html.lenis,html.lenis body{height:auto}
     <li class="card go rv" style="--d:.12s" data-go="bp-rag-with-citations"><span class="arr"><svg><use href="#ar"/></svg></span><span class="no">03</span><h3>The one closest to your task</h3><p>For answering questions from your own documents, that is RAG with citations.</p></li>
   </ol></div>
 </section>
-<section class="s" id="packs-b">
+<section class="s flip" id="packs-b">
   <div class="wrap"><div class="sh">
     <div class="tx rv">
       <p class="mono">Packs and kits</p>
@@ -394,14 +472,14 @@ html.lenis,html.lenis body{height:auto}
   <div class="wrap">
     <div class="viz" data-form="cylinder" aria-hidden="true"></div>
     <div class="join" id="join">
-      <p class="mono" style="color:#33360f"><span id="sign-k">Free · the complete Guard blueprint</span></p>
-      <h2 style="margin-top:10px"><span id="sign-h">Start with the Guard.</span></h2>
-      <form id="sign-form"><label class="sr" for="sign-email">Email address</label><input id="sign-email" name="email" type="email" required placeholder="you@example.com" autocomplete="email"><input type="hidden" name="interest" id="sign-int" value="free-guard"><button class="btn" type="submit" id="sign-btn">Send it to me</button></form>
+      <p class="mono" style="color:#33360f"><span id="sign-k">Prefer email?</span></p>
+      <h2 style="margin-top:10px"><span id="sign-h">Leave it here and we will write to you.</span></h2>
+      <form id="sign-form"><label class="sr" for="sign-email">Email address</label><input id="sign-email" name="email" type="email" required placeholder="you@example.com" autocomplete="email"><input type="hidden" name="interest" id="sign-int" value="setup"><button class="btn" type="submit" id="sign-btn">Contact me</button></form>
       <p id="sign-msg" role="status"></p>
     </div>
     <div class="fcols">
-      <div><p class="brand"><i aria-hidden="true" style="box-shadow:0 0 18px var(--lime)"></i>KrewBots</p><p style="margin-top:12px;max-width:22em;color:#a0a1a5">Teams of AI agents and workflow blueprints, with people in charge.</p></div>
-      <div><p class="mono">Site</p><button type="button" data-go="home">Home</button><button type="button" data-go="blueprints">Agent Blueprints</button><button type="button" data-to="packs">Packs and kits</button></div>
+      <div><p class="brand"><i aria-hidden="true" style="box-shadow:0 0 18px var(--lime)"></i>KrewBots</p><p style="margin-top:12px;max-width:22em;color:#a0a1a5">AI assistants set up for your business, with people in charge.</p></div>
+      <div><p class="mono">Site</p><button type="button" data-go="home">Home</button><button type="button" data-go="blueprints">Blueprints for builders</button><button type="button" data-to="packs">Packs and kits</button></div>
       <div><p class="mono">Blueprints</p><button type="button" data-go="bp-security-guard">Security checkpoint (Guard)</button><button type="button" data-go="bp-voice-agent">Voice agent</button><button type="button" data-go="bp-evals">Evals</button><button type="button" data-go="blueprints">All 24</button></div>
       <div><p class="mono">More</p><button type="button" id="replay">Replay the intro</button><a href="https://www.krewbots.in/">krewbots.in</a></div>
     </div>
@@ -426,6 +504,7 @@ var AR='<svg class="ic"><use href="#ar"/></svg>';
    checkout : hosted payment page per product. A blueprint page uses "bp-<slug>" if set, else "single".
    Anything left empty shows "Tell me when it is on sale" and sends the visitor to the sign-up form instead of a dead link. */
 var KB={
+  whatsapp:"",   /* your WhatsApp number with country code, digits only, e.g. "919876543210". Empty: the WhatsApp buttons become "Ask for a setup" and lead to the email form. */
   signup:"",
   checkout:{"single":"","ai-os-kit":"","7-agent-team":"","personal-pack":"","solo-pack":"","local-pack":"","vault":""}
 };
@@ -752,19 +831,46 @@ D.addEventListener("click",function(e){
   var t=e.target.closest("[data-go],[data-to]");if(!t)return;
   if(t.hasAttribute("data-go")){go(t.getAttribute("data-go"));return;}
   var id=t.getAttribute("data-to");
-  if(id==="packs"&&cur!=="home"){go("blueprints",function(){scrollToId("packs-b");});return;}
+  if(id==="packs"){go("blueprints",function(){scrollToId("packs-b");});return;}
   scrollToId(id);
 });
 var curB=BPD[0];
 function loadB(b,play){curB=b;$("#pick-b").value=b.s;demoB.stop();demoB.load(specOf(b));$$("#tabs-b button").forEach(function(x){x.setAttribute("aria-pressed",x.getAttribute("data-k")===b.s);});if(play)demoB.play();}
 
 function loop(now){tickP(now);tickS();requestAnimationFrame(loop);}
+/* ================= WhatsApp demo: customer chat on one side, the owner's approval on the other ================= */
+var WA=[["c","Hi, saw your ad for Lakeview Residences. 3BHK price?","10:32 PM"],
+ ["b","Hello! I am the AI assistant for Meadow Realty. A 3BHK at Lakeview starts at ₹1.18 Cr on the current price sheet. Here is the brochure.","10:32 PM","Lakeview-brochure.pdf"],
+ ["b","Is this for your own use or investment, and what budget are you working with?","10:32 PM"],
+ ["c","Own use. Around 1.2 Cr. Can I visit this Saturday?","10:34 PM"],
+ ["b","I have asked the owner to confirm Saturday 4:00 PM. You will get the confirmation here.","10:34 PM"]];
+function initWa(){
+  var host=$("#wa-demo");if(!host)return;var chat=$("[data-chat]",host),own=$("[data-own]",host),timer=0,i=0;
+  function bub(m){var d=D.createElement("div");d.className="bub "+m[0];d.innerHTML=esc(m[1])+(m[3]?'<br><span class="file">'+esc(m[3])+'</span>':'')+'<small>'+m[2]+'</small>';chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+  function ask(){
+    own.innerHTML='<div class="own-card"><h3>Site visit needs your approval</h3><dl><dt>Customer</dt><dd>Rahul S.</dd><dt>Wants</dt><dd>3BHK, own use</dd><dt>Budget</dt><dd>₹1.2 Cr</dd><dt>Draft</dt><dd>Confirm visit, Saturday 4:00 PM</dd></dl><button class="approve" type="button">Approve and send</button></div>';
+    $(".approve",own).addEventListener("click",function(){
+      own.innerHTML='<div class="own-card done"><h3>Approved ✓</h3><p>Confirmation sent to Rahul S. The visit is in your calendar for Saturday 4:00 PM.</p></div>';
+      bub(["b","Confirmed: site visit on Saturday at 4:00 PM. See you at the Lakeview sales office.","8:02 AM"]);
+    });
+  }
+  function step(){if(i<WA.length){bub(WA[i++]);timer=setTimeout(step,i===1?900:1700);}else ask();}
+  function run(){clearTimeout(timer);chat.innerHTML="";own.innerHTML='<p class="own-idle">Nothing needs you yet.</p>';i=0;if(reduce){WA.forEach(bub);i=WA.length;ask();}else step();}
+  $("[data-replay]",host).addEventListener("click",run);
+  if("IntersectionObserver" in W&&!reduce){own.innerHTML='<p class="own-idle">Nothing needs you yet.</p>';var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){o.disconnect();run();}});},{threshold:.3});o.observe(host);}else run();
+}
+/* WhatsApp buttons: open a chat when KB.whatsapp is set, otherwise lead to the email form */
+function initWaBtns(){
+  $$("[data-wa]").forEach(function(b){if(!KB.whatsapp){var ic=$("svg",b);b.textContent="Ask for a setup ";if(ic)b.appendChild(ic);}});
+  D.addEventListener("click",function(e){var b=e.target.closest("[data-wa]");if(!b)return;
+    if(KB.whatsapp)W.open("https://wa.me/"+KB.whatsapp+"?text="+encodeURIComponent(b.getAttribute("data-wa")),"_blank","noopener");else want("setup");});
+}
 function want(w){
-  var free=w==="free-guard";$("#sign-int").value=w;
-  $("#sign-k").textContent=free?"Free · the complete Guard blueprint":"Not on sale yet";
-  $("#sign-h").textContent=free?"Start with the Guard.":"Get told when it opens.";
-  $("#sign-btn").textContent=free?"Send it to me":"Notify me";
-  $("#sign-msg").textContent=free?"":"One email when "+w+" goes on sale.";
+  var free=w==="free-guard",setup=w==="setup";$("#sign-int").value=w;
+  $("#sign-k").textContent=free?"Free · the complete Guard blueprint":(setup?"Ask for a setup":"Not on sale yet");
+  $("#sign-h").textContent=free?"Start with the Guard.":(setup?"Leave your email and we will write to you.":"Get told when it opens.");
+  $("#sign-btn").textContent=free?"Send it to me":(setup?"Contact me":"Notify me");
+  $("#sign-msg").textContent=(free||setup)?"":"One email when "+w+" goes on sale.";
   scrollToId("join");try{$("#sign-email").focus({preventScroll:true});}catch(e){}
 }
 D.addEventListener("click",function(e){var t=e.target.closest("[data-want]");if(t)want(t.getAttribute("data-want"));});
@@ -773,16 +879,15 @@ $("#sign-form").addEventListener("submit",function(e){
   if(!KB.signup){msg.textContent="Sign-up is not connected yet, so nothing was sent.";return;}
   btn.disabled=true;msg.textContent="Sending…";
   fetch(KB.signup,{method:"POST",body:new FormData(f),headers:{Accept:"application/json"}}).then(function(r){
-    if(!r.ok)throw 0;f.reset();msg.textContent=$("#sign-int").value==="free-guard"?"Done. Check your inbox for the Guard blueprint.":"Done. You will get one email when it goes on sale.";
+    if(!r.ok)throw 0;var iv=$("#sign-int").value;f.reset();$("#sign-int").value=iv;msg.textContent=iv==="free-guard"?"Done. Check your inbox for the Guard blueprint.":(iv==="setup"?"Done. We will write to you.":"Done. You will get one email when it goes on sale.");
   }).catch(function(){msg.textContent="That did not go through. Please try again in a minute.";}).then(function(){btn.disabled=false;});
 });
-(function(){var miss=[];if(!KB.signup)miss.push("the sign-up form");if(PK.some(function(k){return !KB.checkout[k];}))miss.push("some Buy buttons");
-  if(miss.length)$("#preview-note").textContent="Preview build: "+miss.join(" and ")+" are not connected yet. ";})();
+(function(){var miss=[];if(!KB.whatsapp)miss.push("WhatsApp chat");if(!KB.signup)miss.push("the sign-up form");if(PK.some(function(k){return !KB.checkout[k];}))miss.push("some Buy buttons");
+  if(miss.length)$("#preview-note").textContent="Preview build: "+miss.join(", ")+" are not connected yet. ";})();
 $("#replay").addEventListener("click",function(){toY(0);runFilm();});
 
 function start(){
-  new Finder($("#find-home"),6);new Finder($("#find-full"),0);renderBom($("#bom-home"));renderBom($("#bom-b"));
-  demoHome=new Demo($("#demo-home"),specOf(BYS["security-guard"]));
+  new Finder($("#find-full"),0);renderBom($("#bom-b"));initWa();initWaBtns();
   demoB=new Demo($("#demo-b"),specOf(BPD[0]));
   $("#tabs-b").innerHTML=BPD.map(function(b){return '<button type="button" data-k="'+b.s+'" aria-pressed="false">'+esc(b.t)+'</button>';}).join("");
   loadB(BPD[0],false);
@@ -790,11 +895,10 @@ function start(){
   $("#pick-b").addEventListener("change",function(){loadB(BYS[this.value],true);});
   $("#tabs-b").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;loadB(BYS[b.getAttribute("data-k")],true);});
   $("#open-b").addEventListener("click",function(){go("bp-"+curB.s);});
-  if("IntersectionObserver" in W&&!reduce){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!demoHome.playing&&demoHome.i===0){demoHome.play();o.disconnect();}});},{threshold:.25});o.observe($("#demo-home"));}
   initP();
   if(W.Lenis&&!reduce){try{lenis=new W.Lenis({autoRaf:true,lerp:.09});}catch(e){lenis=null;}}
   show((location.hash||"").replace("#","")||"home");arm($("footer"));
-  var lastW=W.innerWidth,rz=0;W.addEventListener("resize",function(){sizeP();if(W.innerWidth===lastW)return;lastW=W.innerWidth;clearTimeout(rz);rz=setTimeout(function(){demoHome.show();demoB.show();if(demoD&&cur==="bp")demoD.show();},200);});
+  var lastW=W.innerWidth,rz=0;W.addEventListener("resize",function(){sizeP();if(W.innerWidth===lastW)return;lastW=W.innerWidth;clearTimeout(rz);rz=setTimeout(function(){demoB.show();if(demoD&&cur==="bp")demoD.show();},200);});
   function onNav(){var n=(location.hash||"").replace("#","")||"home";if(n!==curKey)show(n);}
   W.addEventListener("hashchange",onNav);W.addEventListener("popstate",onNav);
   requestAnimationFrame(loop);
