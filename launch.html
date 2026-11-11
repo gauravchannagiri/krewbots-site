@@ -265,7 +265,7 @@ html.lenis,html.lenis body{height:auto}
       <p class="ld">KrewBots sells <b>blueprints for teams of AI agents</b>: 24 vendor-neutral plans you adapt to your own tools, each one showing who does what, in what order, and where <b>a person signs off</b>.</p>
       <div class="cta"><button class="btn l" type="button" data-want="free-guard">Get the Guard blueprint free <svg class="ic"><use href="#ar"/></svg></button><button class="btn" type="button" data-to="find">Find the one for your work</button></div>
     </div>
-    <div class="viz" data-form="orbit" aria-hidden="true"></div>
+    <div class="viz" data-form="saturn" aria-hidden="true"></div>
   </div></div>
 </section>
 
@@ -276,7 +276,7 @@ html.lenis,html.lenis body{height:auto}
       <h2>Pick <span class="hl">your work.</span></h2>
       <p class="ld">Tap what you do, or search for a word like WhatsApp, property or video. The overview, diagram and sources of every blueprint are free to read.</p>
     </div>
-    <div class="viz" data-form="galaxy" aria-hidden="true"></div>
+    <div class="viz" data-form="cube" aria-hidden="true"></div>
   </div>
   <div class="body" id="find-home"></div></div>
 </section>
@@ -288,7 +288,7 @@ html.lenis,html.lenis body{height:auto}
       <h2>Watch one <span class="hl">at work.</span></h2>
       <p class="ld">Seven on the team: three agents, a Guard with fixed rules, and three people. Nothing leaves until a person has seen the exact text. In this one, that person is you.</p>
     </div>
-    <div class="viz" data-form="river" aria-hidden="true"></div>
+    <div class="viz" data-form="links" aria-hidden="true"></div>
   </div>
   <div class="body rv" id="demo-home"></div></div>
 </section>
@@ -344,7 +344,7 @@ html.lenis,html.lenis body{height:auto}
       <h2>Watch one <span class="hl">at work.</span></h2>
       <p class="ld">Pick any of the 24 and step through its crew. Every person and company is fictional. Where a person has to decide, the crew waits for you.</p>
     </div>
-    <div class="viz" data-form="river" aria-hidden="true"></div>
+    <div class="viz" data-form="links" aria-hidden="true"></div>
   </div>
   <div class="body"><label class="pick"><span class="mono">Blueprint shown</span><select id="pick-b"></select></label><div class="chips" id="tabs-b" role="group" aria-label="Choose a blueprint"></div><div id="demo-b"></div>
   <p style="margin-top:18px"><button class="btn k" type="button" id="open-b">Open the full blueprint <svg class="ic"><use href="#ar"/></svg></button></p></div></div>
@@ -356,7 +356,7 @@ html.lenis,html.lenis body{height:auto}
       <h2>All <span class="hl">24</span> blueprints.</h2>
       <p class="ld">Filter by what you do, or search. Open any one for its team, steps, checklist, failure modes and sources.</p>
     </div>
-    <div class="viz" data-form="galaxy" aria-hidden="true"></div>
+    <div class="viz" data-form="cube" aria-hidden="true"></div>
   </div>
   <div class="body" id="find-full"></div></div>
 </section>
@@ -367,7 +367,7 @@ html.lenis,html.lenis body{height:auto}
       <h2>Three to <span class="hl">start with.</span></h2>
       <p class="ld">If you are new to agents, build in this order.</p>
     </div>
-    <div class="viz" data-form="helix" aria-hidden="true"></div>
+    <div class="viz" data-form="diamond" aria-hidden="true"></div>
   </div>
   <ol class="grid body">
     <li class="card go rv" data-go="bp-security-guard"><span class="arr"><svg><use href="#ar"/></svg></span><span class="no">01</span><h3>Security checkpoint (Guard)</h3><p>The checkpoint every agent action passes through. Start here.</p></li>
@@ -392,7 +392,7 @@ html.lenis,html.lenis body{height:auto}
 
 <footer>
   <div class="wrap">
-    <div class="viz" data-form="terrain" aria-hidden="true"></div>
+    <div class="viz" data-form="cylinder" aria-hidden="true"></div>
     <div class="join" id="join">
       <p class="mono" style="color:#33360f"><span id="sign-k">Free · the complete Guard blueprint</span></p>
       <h2 style="margin-top:10px"><span id="sign-h">Start with the Guard.</span></h2>
@@ -592,15 +592,15 @@ function renderBom(el){
 function sec(o){return '<section class="s'+(o.flip?" flip":"")+(o.hero?" hero":"")+'"'+(o.id?' id="'+o.id+'"':'')+'><div class="wrap"><div class="sh"><div class="tx'+(o.hero?"":" rv")+'">'+o.k+(o.hero?'<h1>'+o.h+'</h1>':'<h2>'+o.h+'</h2>')+(o.ld?'<p class="ld">'+o.ld+'</p>':'')+(o.cta||'')+'</div><div class="viz" data-form="'+o.f+'" aria-hidden="true"></div></div>'+(o.body?'<div class="body">'+o.body+'</div>':'')+'</div></section>';}
 function renderBp(b){
   var prev=BPD[(b.no+BPD.length-2)%BPD.length],next=BPD[b.no%BPD.length],TY={p:"Person",a:"Agent",c:"Security check"};
-  var h=sec({hero:1,f:"orbit",k:'<p class="mono crumbs"><button type="button" data-go="home">Home</button> › <button type="button" data-go="blueprints">Blueprints</button> › '+bpNo(b)+' of 24</p>',h:esc(b.t),ld:esc(b.i),
+  var h=sec({hero:1,f:"saturn",k:'<p class="mono crumbs"><button type="button" data-go="home">Home</button> › <button type="button" data-go="blueprints">Blueprints</button> › '+bpNo(b)+' of 24</p>',h:esc(b.t),ld:esc(b.i),
       cta:'<div class="cta">'+buy(["bp-"+b.s,"single"],"Get the build steps · ₹99",b.t+" blueprint"," l")+'<button class="btn" type="button" data-to="bp-team">Meet the team</button></div><p class="mono" style="margin-top:18px">Last updated '+esc(b.u)+'</p>'})+
-    sec({flip:1,f:"river",k:'<p class="mono">Demo · an illustration, not a live model</p>',h:'Watch the team <span class="hl">at work.</span>',ld:'The worked example, step by step. Every person and company in it is fictional, including '+esc(b.e)+' (Example).',body:'<div id="demo-d"></div>'})+
+    sec({flip:1,f:"links",k:'<p class="mono">Demo · an illustration, not a live model</p>',h:'Watch the team <span class="hl">at work.</span>',ld:'The worked example, step by step. Every person and company in it is fictional, including '+esc(b.e)+' (Example).',body:'<div id="demo-d"></div>'})+
     sec({id:"bp-team",f:"globe",k:'<p class="mono">The people and agents, and what each one may do</p>',h:'Who is on <span class="hl">the team.</span>',body:'<ul class="team">'+b.m.map(function(m,i){var sym=m[1]==="p"?"you":(m[1]==="c"?"guard":"bot");return '<li class="card rv'+(m[1]==="p"?" dark":"")+'" style="--d:'+(i%3*.05)+'s"><svg aria-hidden="true"><use href="#'+sym+'"/></svg><div><h3>'+esc(m[0])+'<span class="tag">'+TY[m[1]]+'</span></h3><span class="role">'+esc(m[2])+'</span></div><p>'+esc(m[3])+'</p></li>';}).join("")+'</ul>'})+
-    sec({flip:1,f:"helix",k:'<p class="mono">The same steps as the diagram, in order</p>',h:'How it works, <span class="hl">step by step.</span>',ld:'Steps in lime are the ones where a person decides.',body:'<ol class="steps">'+specOf(b).steps.map(function(s){return '<li class="rv'+(s.wait?" h":"")+'"><span><b>'+esc(s.t)+'.</b> '+esc(s.d)+'</span></li>';}).join("")+'</ol>'})+
+    sec({flip:1,f:"diamond",k:'<p class="mono">The same steps as the diagram, in order</p>',h:'How it works, <span class="hl">step by step.</span>',ld:'Steps in lime are the ones where a person decides.',body:'<ol class="steps">'+specOf(b).steps.map(function(s){return '<li class="rv'+(s.wait?" h":"")+'"><span><b>'+esc(s.t)+'.</b> '+esc(s.d)+'</span></li>';}).join("")+'</ol>'})+
     sec({f:"twin",k:'<p class="mono">Fit check</p>',h:'When to use it, and <span class="hl">when not.</span>',body:'<div class="use"><div class="card lime rv"><h3>Use it when</h3><ul>'+b.y.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+'</ul></div><div class="card dark rv no" style="--d:.08s"><h3>Don’t use it when</h3><ul>'+b.n.map(function(x){return "<li>"+esc(x)+"</li>";}).join("")+'</ul></div></div>'})+
-    sec({flip:1,f:"shell",k:'<p class="mono">Failure modes</p>',h:'What usually <span class="hl">goes wrong.</span>',body:'<ol class="grid">'+b.w.map(function(x,i){return '<li class="card rv" style="--d:'+(i%3*.05)+'s"><span class="no">'+("0"+(i+1)).slice(-2)+'</span><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></li>';}).join("")+'</ol>'})+
+    sec({flip:1,f:"hourglass",k:'<p class="mono">Failure modes</p>',h:'What usually <span class="hl">goes wrong.</span>',body:'<ol class="grid">'+b.w.map(function(x,i){return '<li class="card rv" style="--d:'+(i%3*.05)+'s"><span class="no">'+("0"+(i+1)).slice(-2)+'</span><h3>'+esc(x[0])+'</h3><p>'+esc(x[1])+'</p></li>';}).join("")+'</ol>'})+
     sec({f:"torus",k:'<p class="mono">Named and linked</p>',h:'Sources.',ld:'Vendor-neutral: no product to buy is named. The overview, diagram and sources are public. The full build steps, prompts, config and test checklist are ₹99, or included with the Builder Vault.',cta:'<div class="cta">'+buy(["bp-"+b.s,"single"],"Get the full build steps for ₹99",b.t+" blueprint"," l")+'</div>',body:'<ol class="srcs">'+b.r.map(function(x){return '<li><a href="'+esc(x[1])+'" rel="noopener">'+esc(x[0])+'</a></li>';}).join("")+'</ol>'})+
-    sec({flip:1,f:"galaxy",k:'<p class="mono">Related blueprints</p>',h:'Keep <span class="hl">going.</span>',body:'<ol class="grid">'+b.l.map(function(s,i){return regRow(BYS[s],i);}).join("")+'</ol><div class="pn"><button class="btn" type="button" data-go="bp-'+prev.s+'">‹ '+bpNo(prev)+' '+esc(prev.t)+'</button><button class="btn" type="button" data-go="bp-'+next.s+'">'+bpNo(next)+' '+esc(next.t)+' ›</button></div>'});
+    sec({flip:1,f:"cube",k:'<p class="mono">Related blueprints</p>',h:'Keep <span class="hl">going.</span>',body:'<ol class="grid">'+b.l.map(function(s,i){return regRow(BYS[s],i);}).join("")+'</ol><div class="pn"><button class="btn" type="button" data-go="bp-'+prev.s+'">‹ '+bpNo(prev)+' '+esc(prev.t)+'</button><button class="btn" type="button" data-go="bp-'+next.s+'">'+bpNo(next)+' '+esc(next.t)+' ›</button></div>'});
   views.bp.innerHTML=h;
   demoD=new Demo($("#demo-d"),specOf(b));
   if("IntersectionObserver" in W&&!reduce){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&demoD&&!demoD.playing&&demoD.i===0){demoD.play();o.disconnect();}});},{threshold:.25});o.observe($("#demo-d"));}
@@ -619,24 +619,27 @@ function rotZ(a){var c=Math.cos(a),s=Math.sin(a),x=out[0],y=out[1];out[0]=x*c-y*
 function sph(j,n,rad,spin){var ph=Math.acos(1-2*((j%n)+.5)/n),th=2.39996*j+spin;out[0]=rad*Math.sin(ph)*Math.cos(th);out[1]=rad*Math.cos(ph);out[2]=rad*Math.sin(ph)*Math.sin(th);}
 var F={
   dust:function(j,t,p){out[0]=(p.r*2-1)*1.8+Math.sin(t*.25+j)*.08;out[1]=(p.s*2-1)*1.5+Math.cos(t*.2+j*1.3)*.08;out[2]=(p.q*2-1);out[3]=.3+p.q*.4;out[4]=.8;},
-  river:function(j,t,p){var x=((p.r+t*.035*(.6+p.s))%1)*3-1.5,env=.55+.45*Math.sin(x*1.7+1+t*.2);
-    out[0]=x;out[1]=Math.sin(x*1.5+t*.45)*.2+(p.s-.5)*.62*env;out[2]=Math.cos(x*1.2+t*.3)*.45+(p.q-.5)*.9;out[3]=.5+p.q*.5;out[4]=1;rotZ(-.34);},
-  terrain:function(j,t,p){var cols=PW<700?34:54,gx=(j%cols)/(cols-1)*2-1,d=p.r,sc=.22+d*1.15,h=Math.sin(gx*3.4+t*.7)*.13+Math.sin(d*8-t*1.1+gx*1.5)*.1;
-    out[0]=gx*sc*1.45;out[1]=-.5+d*d*1.3-h*sc;out[2]=0;out[3]=.25+d*.75;out[4]=.45+d*1.1;},
   globe:function(j,t,p){sph(j,N,.92,t*.3);rotX(.35);out[3]=out[2]<0?1:.28;out[4]=out[2]<0?1.05:.7;},
   stack:function(j,t,p){var L=4,l=j%L,gw=Math.max(8,Math.round(Math.sqrt(N/L))),gi=Math.floor(j/L),gx=(gi%gw)/(gw-1)-.5,gy=(Math.floor(gi/gw)%gw)/(gw-1)-.5;
     out[0]=gx*1.3;out[2]=gy*1.3;out[1]=(1.5-l)*.4+Math.sin(t*.9+l*1.1)*.03;rotY(.785+Math.sin(t*.25)*.16);rotX(-.5);out[2]*=.3;out[3]=.4+l*.2;out[4]=.7;},
-  orbit:function(j,t,p){
-    if(j%9<2){sph(j,N,.2*Math.cbrt(p.r),t*.6);out[3]=1.15;out[4]=1.15;return;}
-    var k=j%3,big=j<7,a=p.r*TAU+t*(.22+k*.09)*(k%2?1:-1),rad=[.56,.8,1.04][k]+(big?0:(p.s-.5)*.05);
-    out[0]=rad*Math.cos(a);out[2]=rad*Math.sin(a);out[1]=big?0:(p.q-.5)*.03;rotX([.42,.5,.36][k]);rotZ([-.38,.22,.55][k]);out[3]=big?1.3:.75;out[4]=big?3.2:.85;},
-  galaxy:function(j,t,p){var arm=j%3,rad=Math.sqrt(p.r)*1.08,a=arm*TAU/3+rad*4.4+t*.16+(p.s-.5)*.55/(rad+.35);
-    out[0]=rad*Math.cos(a);out[2]=rad*Math.sin(a);out[1]=(p.q-.5)*.1*(1.1-rad);rotX(1.12);rotZ(-.25);out[3]=1.1-rad*.6;out[4]=1.15-rad*.4;},
   torus:function(j,t,p){var u=p.r*TAU+t*.18,v=p.s*TAU+t*.5,R=.74,r=.24;out[0]=(R+r*Math.cos(v))*Math.cos(u);out[2]=(R+r*Math.cos(v))*Math.sin(u);out[1]=r*Math.sin(v);rotX(1.08);rotZ(.2);out[3]=out[2]<.1?1:.4;out[4]=.9;},
-  helix:function(j,t,p){var x=p.r*2.6-1.3,st=j%2,a=x*4.6+t*.8+st*Math.PI,k=(j%6===0)?(p.s*2-1):1;
-    out[0]=x;out[1]=Math.sin(a)*.4*k;out[2]=Math.cos(a)*.4*k;rotZ(-.3);out[3]=k===1?1:.45;out[4]=k===1?1.05:.7;},
   twin:function(j,t,p){var sd=j%2?1:-1;sph(Math.floor(j/2),Math.ceil(N/2),.44,t*.35*sd);out[0]+=sd*.56;out[3]=out[2]<0?1:.3;out[4]=.9;},
-  shell:function(j,t,p){var k=(p.r+t*.07)%1;sph(j,N,.3+k*.75,t*.1);out[3]=1.1-k;out[4]=1.15-k*.5;}
+  /* ---- exact solids: every particle sits on a surface, evenly spaced ---- */
+  saturn:function(j,t,p){
+    if(j%3===0){sph(Math.floor(j/3),Math.ceil(N/3),.46,t*.35);rotX(.42);rotZ(-.3);out[3]=out[2]<0?1:.3;out[4]=1;return;}
+    var band=j%6,a=p.r*TAU+t*(.1+band*.012),rad=.7+band*.068;
+    out[0]=rad*Math.cos(a);out[2]=rad*Math.sin(a);out[1]=0;rotX(.42);rotZ(-.3);out[3]=out[2]<0?1:.42;out[4]=.8;},
+  links:function(j,t,p){var sd=j%2,u=p.r*TAU+t*.2*(sd?1:-1),v=p.s*TAU+t*.5,R=.5,r=.13,k=R+r*Math.cos(v);
+    if(sd){out[0]=k*Math.cos(u)+.27;out[1]=k*Math.sin(u);out[2]=r*Math.sin(v);}else{out[0]=k*Math.cos(u)-.27;out[2]=k*Math.sin(u);out[1]=r*Math.sin(v);}
+    rotY(Math.sin(t*.25)*.5+.3);rotX(.45);out[3]=out[2]<.05?1:.35;out[4]=.85;},
+  cube:function(j,t,p){var f=j%6,k=Math.floor(j/6),g=Math.max(8,Math.floor(Math.sqrt(N/6))),a=((k%g)/(g-1)-.5)*1.16,b=((Math.floor(k/g)%g)/(g-1)-.5)*1.16,h=(f%2?.58:-.58),ax=f>>1;
+    out[0]=ax===0?h:a;out[1]=ax===1?h:(ax===0?a:b);out[2]=ax===2?h:b;rotY(t*.3+.6);rotX(.52);out[3]=out[2]<0?1:.3;out[4]=out[2]<0?.9:.7;},
+  diamond:function(j,t,p){var h=j%8,g=PW<700?15:21,T=g*(g+1)/2,k=Math.floor(j/8)%T,row=Math.floor((Math.sqrt(8*k+1)-1)/2),col=k-row*(row+1)/2,w=row/(g-1),a=row?col/row*w:0,b=w-a,e=col===0||col===row||row===g-1;
+    out[0]=a*(h&1?1:-1)*.82;out[2]=b*(h&2?1:-1)*.82;out[1]=(1-w)*(h&4?1:-1)*1.08;rotY(t*.35);rotX(.24);out[3]=(e?1.15:.8)*(out[2]<0?1:.32);out[4]=e?1:.72;},
+  cylinder:function(j,t,p){var L=PW<700?10:13,l=j%L,per=Math.floor(N/L),a=(Math.floor(j/L)/per)*TAU+t*.22*(l%2?1:-1);
+    out[0]=.6*Math.cos(a);out[2]=.6*Math.sin(a);out[1]=(l/(L-1)-.5)*1.6;rotX(.42);rotZ(.22);out[3]=out[2]<0?1:.3;out[4]=.85;},
+  hourglass:function(j,t,p){var L=PW<700?14:18,l=j%L,y=(l/(L-1))*2-1,rad=.08+Math.abs(y)*.62,per=Math.floor(N/L),a=(Math.floor(j/L)/per)*TAU*3+t*.3*(y<0?1:-1);
+    out[0]=rad*Math.cos(a);out[2]=rad*Math.sin(a);out[1]=y*.9;rotX(.3);rotZ(-.12);out[3]=out[2]<0?1:.3;out[4]=.8;}
 };
 function sprite(col,soft){var c=D.createElement("canvas"),s=48;c.width=c.height=s;var x=c.getContext("2d"),gr=x.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
   if(soft){gr.addColorStop(0,"#fff");gr.addColorStop(.12,col);gr.addColorStop(.3,col+"66");gr.addColorStop(1,col+"00");}
@@ -690,7 +693,7 @@ function tickP(now){
 }
 
 /* ================= opening film ================= */
-var SCENES=[["Planner","Plans the <em>work.</em>","river"],["Builder","Builds it, <em>layer by layer.</em>","stack"],["Fixer","Fixes what <em>breaks.</em>","helix"],["Reviewer","Checks <em>every line.</em>","terrain"],["Messenger","Delivers <em>everywhere.</em>","globe"],["Guard","Blocks what it <em>should.</em>","torus"]];
+var SCENES=[["Planner","Plans the <em>work.</em>","links"],["Builder","Builds it, <em>layer by layer.</em>","stack"],["Fixer","Fixes what <em>breaks.</em>","cube"],["Reviewer","Checks <em>every line.</em>","cylinder"],["Messenger","Delivers <em>everywhere.</em>","globe"],["Guard","Blocks what it <em>should.</em>","torus"]];
 function runFilm(){
   var root=$("#film");if(!root)return;
   if(reduce){root.remove();return;}
@@ -710,7 +713,7 @@ function runFilm(){
     if(sc!==cur){cur=sc;
       if(sc<0){film.form="dust";cap("KrewBots","Meet the <em>crew.</em>");}
       else if(sc<6){film.form=SCENES[sc][2];cap("0"+(sc+1)+" / 06 · "+SCENES[sc][0],SCENES[sc][1]);}
-      else{film.form="orbit";cap("The crew","Six agents. <em>One human in charge.</em>");}}
+      else{film.form="saturn";cap("The crew","Six agents. <em>One human in charge.</em>");}}
     bar.style.width=(clamp(t/T_FLY)*100)+"%";
     var fly=clamp((t-T_FLY)/1.1);
     if(fly>0){film.logo=slot();film.fade=1-fly*.2;var fo=clamp((t-T_FLY-.2)/.8);root.style.opacity=1-fo;$(".fc",root).style.opacity=$(".bar",root).style.opacity=$(".skip",root).style.opacity=1-clamp(fly*3);}
