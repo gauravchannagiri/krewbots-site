@@ -240,6 +240,20 @@ main.out{opacity:0}
 @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}}
 @media(min-width:900px){.wa{grid-template-columns:1fr 1fr}.wa-chat{height:360px}}
 @media(prefers-reduced-motion:reduce){.bub,.own-card{animation:none}}
+.card .pain{color:var(--fg);font-weight:700;font-size:1rem;margin-top:10px}
+.card.on .pain{color:#0e0f10}
+.split{display:grid;gap:14px;margin-top:16px}
+.split .lbl{display:block;font:500 .64rem/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
+.split ul{list-style:none;display:grid;gap:5px;font-size:.92rem}
+.split li{padding-left:16px;position:relative;color:var(--mut)}
+.split li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--lime)}
+.split div+div li::before{background:none;box-shadow:0 0 0 1.5px var(--lime)}
+.card.on .split .lbl,.card.on .split li{color:#33360f}.card.on .split li::before{background:#0e0f10}.card.on .split div+div li::before{background:none;box-shadow:0 0 0 1.5px #0e0f10}
+.card .never{font:500 .72rem/1.5 var(--mono);margin-top:14px}
+#wa-tabs{margin-bottom:14px}
+.bub.n{align-self:center;max-width:100%;background:none;color:var(--mut);font:500 .66rem/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:6px}
+.wa-auto{margin-top:14px;padding:14px 18px;border-radius:18px;background:var(--card);font-size:.92rem;color:var(--mut)}
+.wa-auto b{color:var(--fg)}
 /* liquid glass: the top bar, the owner's approval pane and card, and the mobile step caption.
    Translucent, blurred, with a bright rim. Everything else stays solid so text over the particles stays readable. */
 .top{top:10px;margin:10px 12px 0;padding:9px 16px;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
@@ -315,15 +329,16 @@ html.lenis,html.lenis body{height:auto}
     <div class="tx rv">
       <p class="mono">Demo · an illustration with a fictional business</p>
       <h2>A late-night enquiry, <span class="hl">handled.</span></h2>
-      <p class="ld">On the left is what your customer sees. On the right is what you see. The visit is only confirmed when you approve it, so try the button.</p>
+      <p class="ld">Pick a business. On the left is what the customer sees, on the right is what you see. Nothing that matters goes out until you approve it, so try the button.</p>
     </div>
     <div class="viz" data-form="links" aria-hidden="true"></div>
   </div>
-  <div class="body"><div class="wa" id="wa-demo">
+  <div class="body"><div class="fchips" id="wa-tabs" role="group" aria-label="Choose a business"></div><div class="wa" id="wa-demo">
     <div class="wa-p"><p class="mono">What your customer sees · WhatsApp</p><div class="wa-chat" data-chat aria-live="polite"></div></div>
     <div class="wa-p own"><p class="mono">What you see · your approvals</p><div data-own aria-live="polite"></div><button class="btn" type="button" data-replay>Play it again</button></div>
   </div>
-  <p class="note">Example data: Meadow Realty, Lakeview Residences and the customer are fictional. No real messages are sent.</p></div></div>
+  <p class="wa-auto" id="wa-auto"></p>
+  <p class="note">Example data: every business, project and person in these demos is fictional. No real messages are sent.</p></div></div>
 </section>
 
 <section class="s" id="systems">
@@ -336,9 +351,22 @@ html.lenis,html.lenis body{height:auto}
     <div class="viz" data-form="cube" aria-hidden="true"></div>
   </div>
   <ol class="grid body">
-    <li class="card rv"><span class="no">01 · Brokers and builders</span><h3>Property enquiries to site visits</h3><p>A buyer asks about a project and gets the brochure and price sheet you approved. The assistant asks about configuration, budget and timing, then drafts a site visit for you to approve.</p><button class="btn" type="button" data-wa="Hi KrewBots, I want the property enquiry assistant.">Ask about this <svg class="ic"><use href="#ar"/></svg></button></li>
-    <li class="card rv" style="--d:.05s"><span class="no">02 · Clinics, consultants, coaching</span><h3>Appointment desk</h3><p>An enquiry comes in after hours. The assistant offers free slots from your calendar, books the ordinary ones, sends a reminder before the visit and passes unusual requests to you.</p><button class="btn" type="button" data-wa="Hi KrewBots, I want the appointment desk.">Ask about this <svg class="ic"><use href="#ar"/></svg></button></li>
-    <li class="card rv" style="--d:.1s"><span class="no">03 · Shops, distributors, agencies</span><h3>Payment reminders</h3><p>Pending invoices are read from your sheet. The assistant drafts a polite reminder with your payment link for each one, and nothing is sent until you approve the batch.</p><button class="btn" type="button" data-wa="Hi KrewBots, I want the payment reminder assistant.">Ask about this <svg class="ic"><use href="#ar"/></svg></button></li>
+    <li class="card rv"><span class="no">01 · Brokers and builders</span><h3>Property enquiries to site visits</h3>
+      <p class="pain">Enquiries arrive at night and on weekends. By the time someone calls back, the buyer has moved on.</p>
+      <div class="split"><div><span class="lbl">Does on its own</span><ul><li>Replies straight away with your approved brochure and price sheet</li><li>Asks about configuration, budget and timing</li><li>Checks your calendar for free visit slots</li></ul></div>
+      <div><span class="lbl">Waits for you</span><ul><li>Confirming the site visit</li><li>Anything outside the price sheet, such as a discount</li></ul></div></div>
+      <button class="btn" type="button" data-wa="Hi KrewBots, I want the property enquiry assistant.">Ask about this <svg class="ic"><use href="#ar"/></svg></button></li>
+    <li class="card rv" style="--d:.05s"><span class="no">02 · Clinics, consultants, coaching</span><h3>Appointment desk</h3>
+      <p class="pain">Evening and Sunday enquiries go unanswered, and people who did book forget to turn up.</p>
+      <div class="split"><div><span class="lbl">Does on its own</span><ul><li>Offers free slots from your calendar</li><li>Books ordinary appointments</li><li>Sends a reminder before the visit</li></ul></div>
+      <div><span class="lbl">Waits for you</span><ul><li>Slots outside your normal hours</li><li>Fee exceptions and special requests</li></ul></div></div>
+      <p class="never">It does not answer medical questions. Those go to your staff.</p>
+      <button class="btn" type="button" data-wa="Hi KrewBots, I want the appointment desk.">Ask about this <svg class="ic"><use href="#ar"/></svg></button></li>
+    <li class="card rv" style="--d:.1s"><span class="no">03 · Shops, distributors, agencies</span><h3>Payment reminders</h3>
+      <p class="pain">Chasing overdue invoices is awkward, so it gets put off until it is a problem.</p>
+      <div class="split"><div><span class="lbl">Does on its own</span><ul><li>Reads pending invoices from your sheet</li><li>Works out which are overdue</li><li>Drafts a polite reminder with your payment link for each</li></ul></div>
+      <div><span class="lbl">Waits for you</span><ul><li>The whole batch, before anything is sent</li><li>You can skip any customer you would rather call yourself</li></ul></div></div>
+      <button class="btn" type="button" data-wa="Hi KrewBots, I want the payment reminder assistant.">Ask about this <svg class="ic"><use href="#ar"/></svg></button></li>
   </ol></div>
 </section>
 
@@ -388,7 +416,8 @@ html.lenis,html.lenis body{height:auto}
     <li class="card rv"><h3>Will my WhatsApp number get banned?</h3><p>We set up only through the official WhatsApp Business platform. We do not use unofficial QR-code tools, which put a business number at risk.</p></li>
     <li class="card rv" style="--d:.05s"><h3>Does it handle Hindi and mixed Hindi-English?</h3><p>We test it on real messages from your own customers before it goes live, and show you the results. If it is not good enough for your customers, we will say so.</p></li>
     <li class="card rv" style="--d:.1s"><h3>What does it cost to run?</h3><p>WhatsApp and the AI provider charge for usage. We estimate that for your volume before you commit, so the running cost is known up front.</p></li>
-    <li class="card rv" style="--d:.15s"><h3>Do I need to hire a developer?</h3><p>No. You need your business documents for WhatsApp verification, and someone on your team who can approve messages.</p></li>
+    <li class="card rv" style="--d:.15s"><h3>Why not just hire a telecaller?</h3><p>A good telecaller persuades better and handles a difficult buyer better, and this does not replace one. It covers the hours nobody does: nights, Sundays and the fifth follow-up. It answers at once, then hands the warm enquiry to your person.</p></li>
+    <li class="card rv" style="--d:.2s"><h3>Do I need to hire a developer?</h3><p>No. You need your business documents for WhatsApp verification, and someone on your team who can approve messages.</p></li>
   </ol></div>
 </section>
 
@@ -858,25 +887,47 @@ function loadB(b,play){curB=b;$("#pick-b").value=b.s;demoB.stop();demoB.load(spe
 
 function loop(now){tickP(now);tickS();requestAnimationFrame(loop);}
 /* ================= WhatsApp demo: customer chat on one side, the owner's approval on the other ================= */
-var WA=[["c","Hi, saw your ad for Lakeview Residences. 3BHK price?","10:32 PM"],
- ["b","Hello! I am the AI assistant for Meadow Realty. A 3BHK at Lakeview starts at ₹1.18 Cr on the current price sheet. Here is the brochure.","10:32 PM","Lakeview-brochure.pdf"],
- ["b","Is this for your own use or investment, and what budget are you working with?","10:32 PM"],
- ["c","Own use. Around 1.2 Cr. Can I visit this Saturday?","10:34 PM"],
- ["b","I have asked the owner to confirm Saturday 4:00 PM. You will get the confirmation here.","10:34 PM"]];
+var WAS=[
+ {tab:"Property broker",
+  msgs:[["c","Hi, saw your ad for Lakeview Residences. 3BHK price?","10:32 PM"],
+   ["b","Hello! I am the AI assistant for Meadow Realty. A 3BHK at Lakeview starts at ₹1.18 Cr on the current price sheet. Here is the brochure.","10:32 PM","Lakeview-brochure.pdf"],
+   ["b","Is this for your own use or investment, and what budget are you working with?","10:32 PM"],
+   ["c","Own use. Around 1.2 Cr. Can I visit this Saturday?","10:34 PM"],
+   ["b","I have asked the owner to confirm Saturday 4:00 PM. You will get the confirmation here.","10:34 PM"]],
+  ask:{h:"Site visit needs your approval",rows:[["Customer","Rahul S."],["Wants","3BHK, own use"],["Budget","₹1.2 Cr"],["Draft","Confirm visit, Saturday 4:00 PM"]],btn:"Approve and send"},
+  done:"Confirmation sent to Rahul S. The visit is in your calendar for Saturday 4:00 PM.",
+  after:["b","Confirmed: site visit on Saturday at 4:00 PM. See you at the Lakeview sales office.","8:02 AM"],
+  auto:"replied within the minute, sent the approved brochure, asked about use and budget, and checked your calendar."},
+ {tab:"Clinic front desk",
+  msgs:[["c","Hello, how much does an implant cost? And can I come this Saturday afternoon?","9:14 PM"],
+   ["b","Hello! I am the AI assistant for Harbour Dental. I can't advise on treatment or cost; the dentist will go through that at your visit. I can book you a consultation.","9:14 PM"],
+   ["b","On Saturday we close at 1:00 PM. I have 11:30 AM free, or I can ask the clinic about a later time.","9:14 PM"],
+   ["c","Afternoon only please, around 4.","9:16 PM"],
+   ["b","I have asked the clinic whether Saturday 4:00 PM is possible. You will hear back here.","9:16 PM"]],
+  ask:{h:"A slot outside your hours",rows:[["Patient","Vikram N."],["Wants","First consultation"],["Asked for","Saturday 4:00 PM"],["Your hours","Saturday until 1:00 PM"]],btn:"Approve this slot"},
+  done:"Vikram N. is booked for Saturday 4:00 PM. A reminder goes out the day before.",
+  after:["b","Good news: the clinic has opened Saturday 4:00 PM for you. You are booked for a consultation with the dentist.","8:10 AM"],
+  auto:"answered after hours, declined the medical question, offered the free slot from your calendar, and queued the reminder."},
+ {tab:"Distributor",
+  msgs:[["n","Friday 4:00 PM · nothing has been sent to any customer yet"]],
+  ask:{h:"3 payment reminders drafted",rows:[["Northgate Traders","₹68,500 · 14 days overdue"],["Apex Hardware","₹23,200 · 9 days overdue"],["Riverside Stores","₹41,000 · 21 days overdue"]],btn:"Approve all 3"},
+  done:"3 reminders sent. On the left is what Northgate Traders received.",
+  after:["b","Hello Rajesh ji, a gentle reminder that invoice INV-409 for ₹68,500 is now 14 days overdue. You can pay using the link below. Thank you. Sunrise Distributors","4:01 PM","Payment link"],
+  auto:"read the pending invoices from your sheet, worked out which are overdue, and drafted a reminder for each."}];
 function initWa(){
-  var host=$("#wa-demo");if(!host)return;var chat=$("[data-chat]",host),own=$("[data-own]",host),timer=0,i=0;
-  function bub(m){var d=D.createElement("div");d.className="bub "+m[0];d.innerHTML=esc(m[1])+(m[3]?'<br><span class="file">'+esc(m[3])+'</span>':'')+'<small>'+m[2]+'</small>';chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+  var host=$("#wa-demo");if(!host)return;var chat=$("[data-chat]",host),own=$("[data-own]",host),tabs=$("#wa-tabs"),auto=$("#wa-auto"),timer=0,i=0,sc=WAS[0];
+  var IDLE='<p class="own-idle">Nothing needs you yet.</p>';
+  tabs.innerHTML=WAS.map(function(w,k){return '<button type="button" data-k="'+k+'" aria-pressed="'+(k===0)+'">'+w.tab+'</button>';}).join("");
+  function bub(m){var d=D.createElement("div");d.className="bub "+m[0];d.innerHTML=esc(m[1])+(m[3]?'<br><span class="file">'+esc(m[3])+'</span>':'')+(m[2]?'<small>'+m[2]+'</small>':'');chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
   function ask(){
-    own.innerHTML='<div class="own-card"><h3>Site visit needs your approval</h3><dl><dt>Customer</dt><dd>Rahul S.</dd><dt>Wants</dt><dd>3BHK, own use</dd><dt>Budget</dt><dd>₹1.2 Cr</dd><dt>Draft</dt><dd>Confirm visit, Saturday 4:00 PM</dd></dl><button class="approve" type="button">Approve and send</button></div>';
-    $(".approve",own).addEventListener("click",function(){
-      own.innerHTML='<div class="own-card done"><h3>Approved ✓</h3><p>Confirmation sent to Rahul S. The visit is in your calendar for Saturday 4:00 PM.</p></div>';
-      bub(["b","Confirmed: site visit on Saturday at 4:00 PM. See you at the Lakeview sales office.","8:02 AM"]);
-    });
+    var a=sc.ask;own.innerHTML='<div class="own-card"><h3>'+esc(a.h)+'</h3><dl>'+a.rows.map(function(r){return '<dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd>';}).join("")+'</dl><button class="approve" type="button">'+esc(a.btn)+'</button></div>';
+    $(".approve",own).addEventListener("click",function(){own.innerHTML='<div class="own-card done"><h3>Approved ✓</h3><p>'+esc(sc.done)+'</p></div>';bub(sc.after);});
   }
-  function step(){if(i<WA.length){bub(WA[i++]);timer=setTimeout(step,i===1?900:1700);}else ask();}
-  function run(){clearTimeout(timer);chat.innerHTML="";own.innerHTML='<p class="own-idle">Nothing needs you yet.</p>';i=0;if(reduce){WA.forEach(bub);i=WA.length;ask();}else step();}
+  function step(){if(i<sc.msgs.length){bub(sc.msgs[i++]);timer=setTimeout(step,i===1?900:1700);}else ask();}
+  function run(){clearTimeout(timer);chat.innerHTML="";own.innerHTML=IDLE;i=0;auto.innerHTML="<b>Handled without you:</b> "+esc(sc.auto);if(reduce){sc.msgs.forEach(bub);i=sc.msgs.length;ask();}else step();}
+  tabs.addEventListener("click",function(e){var b=e.target.closest("[data-k]");if(!b)return;sc=WAS[+b.getAttribute("data-k")];$$("[data-k]",tabs).forEach(function(x){x.setAttribute("aria-pressed",x===b);});run();});
   $("[data-replay]",host).addEventListener("click",run);
-  if("IntersectionObserver" in W&&!reduce){own.innerHTML='<p class="own-idle">Nothing needs you yet.</p>';var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){o.disconnect();run();}});},{threshold:.3});o.observe(host);}else run();
+  if("IntersectionObserver" in W&&!reduce){own.innerHTML=IDLE;auto.innerHTML="<b>Handled without you:</b> "+esc(sc.auto);var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){o.disconnect();run();}});},{threshold:.3});o.observe(host);}else run();
 }
 /* WhatsApp buttons: open a chat when KB.whatsapp is set, otherwise lead to the email form */
 function initWaBtns(){
