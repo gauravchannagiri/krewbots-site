@@ -92,9 +92,9 @@ nav .nl[aria-current=page]{background:var(--card)}
 .card .arr{position:absolute;right:18px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--bg);display:grid;place-items:center;transition:transform .4s var(--ease),background-color .3s}
 .card .arr svg{width:14px;height:14px;transform:rotate(45deg)}
 li.card.go{cursor:pointer}
-li.card.go:hover{background:var(--lime);color:#0e0f10;transform:translateY(-3px)}
-li.card.go:hover p,li.card.go:hover .no{color:#33360f}
-li.card.go:hover .arr{transform:rotate(-45deg);background:#0e0f10;color:#fff}
+li.card.go:hover{box-shadow:0 0 0 1.5px var(--lime),0 0 26px rgba(201,248,92,.28);transform:translateY(-3px)}
+li.card.go:hover .no{color:var(--lime)}
+li.card.go:hover .arr{transform:rotate(-45deg);background:var(--lime);color:#0e0f10}
 .card.dark{background:var(--inv);color:var(--invfg)}.card.dark p{color:color-mix(in srgb,var(--invfg) 70%,transparent)}
 .card.lime{background:var(--lime);color:#0e0f10}.card.lime p,.card.lime .no{color:#33360f}
 .rowc{display:flex;gap:16px;align-items:flex-start}
@@ -241,14 +241,14 @@ main.out{opacity:0}
 @media(min-width:900px){.wa{grid-template-columns:1fr 1fr}.wa-chat{height:360px}}
 @media(prefers-reduced-motion:reduce){.bub,.own-card{animation:none}}
 .card .pain{color:var(--fg);font-weight:700;font-size:1rem;margin-top:10px}
-.card.on .pain{color:#0e0f10}
+.card.on .pain{color:var(--fg)}
 .split{display:grid;gap:14px;margin-top:16px}
 .split .lbl{display:block;font:500 .64rem/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:6px}
 .split ul{list-style:none;display:grid;gap:5px;font-size:.92rem}
 .split li{padding-left:16px;position:relative;color:var(--mut)}
 .split li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--lime)}
 .split div+div li::before{background:none;box-shadow:0 0 0 1.5px var(--lime)}
-.card.on .split .lbl,.card.on .split li{color:#33360f}.card.on .split li::before{background:#0e0f10}.card.on .split div+div li::before{background:none;box-shadow:0 0 0 1.5px #0e0f10}
+.card.on .split .lbl,.card.on .split li{color:var(--mut)}
 .card .never{font:500 .72rem/1.5 var(--mono);margin-top:14px}
 #wa-tabs{margin-bottom:14px}
 .bub.n{align-self:center;max-width:100%;background:none;color:var(--mut);font:500 .66rem/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:6px}
@@ -271,7 +271,8 @@ nav .nl[aria-current=page]{background:rgba(255,255,255,.12)}
   border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.26),0 14px 44px rgba(0,0,0,.7)}}
 /* no blur support, or the visitor asked for less transparency: fall back to solid surfaces */
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.top{background:rgba(16,18,21,.94)}.wa-p.own{background:var(--card)}.cap{background:var(--bg)}}
-@media(prefers-reduced-transparency:reduce){.top{background:#111316;backdrop-filter:none;-webkit-backdrop-filter:none}.wa-p.own{background:var(--card);backdrop-filter:none;-webkit-backdrop-filter:none}.own-card{background:var(--bg)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.card.on{background:var(--card2)}}
+@media(prefers-reduced-transparency:reduce){.card.on{background:var(--card2);backdrop-filter:none;-webkit-backdrop-filter:none}.top{background:#111316;backdrop-filter:none;-webkit-backdrop-filter:none}.wa-p.own{background:var(--card);backdrop-filter:none;-webkit-backdrop-filter:none}.own-card{background:var(--bg)}
   .cap{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none}}
 /* smooth scroll (Lenis) */
 html.lenis,html.lenis body{height:auto}
@@ -280,11 +281,11 @@ html.lenis,html.lenis body{height:auto}
 /* scroll-linked text fill and the card in focus */
 .w{transition:opacity .25s linear}
 .card{transition:background-color .45s,color .45s,box-shadow .6s,transform .4s var(--ease)}
-.card.on{background:var(--lime);color:#0e0f10;box-shadow:0 0 0 1px var(--lime),0 0 24px rgba(201,248,92,.55),0 0 90px rgba(201,248,92,.24)}
-.card.on p,.card.on .no{color:#33360f}
-.card.on .arr{background:#0e0f10;color:#fff}
+.card.on{background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));color:var(--fg);backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);box-shadow:0 0 0 1.5px var(--lime),0 0 26px rgba(201,248,92,.28),inset 0 1px 0 rgba(255,255,255,.25)}
+.card.on p{color:var(--mut)}.card.on .no{color:var(--lime)}.card.on h3,.card.on li{color:var(--fg)}
+.card.on .arr{background:var(--lime);color:#0e0f10}
 .grid .card .btn{margin-top:16px;background:var(--bg)}
-.grid .card.on .btn{background:#0e0f10;color:#fff}
+.grid .card.on .btn,.card.on .btn{background:var(--lime);color:#0e0f10}
 </style>
 </head>
 <body>
